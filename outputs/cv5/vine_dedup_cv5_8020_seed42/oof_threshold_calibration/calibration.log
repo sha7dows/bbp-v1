@@ -1,0 +1,8 @@
+2026-08-16 10:00:36,925 INFO OOF predictions collected: fold=1 sessions=156
+2026-08-16 10:00:48,940 INFO OOF predictions collected: fold=2 sessions=155
+2026-08-16 10:01:04,421 INFO OOF predictions collected: fold=3 sessions=155
+2026-08-16 10:01:18,361 INFO OOF predictions collected: fold=4 sessions=155
+2026-08-16 10:01:32,868 INFO OOF predictions collected: fold=5 sessions=155
+2026-08-16 10:01:53,827 INFO OOF baseline threshold=0.500000 metrics={"auroc": 0.8287818775623653, "macro_f1": 0.7568922305764412, "positive_f1": 0.680451127819549, "precision": 0.6262975778546713, "recall": 0.7448559670781894, "threshold": 0.5}
+2026-08-16 10:01:53,828 INFO OOF selected threshold=0.506633 metrics={"auroc": 0.8287818775623653, "macro_f1": 0.7605323310549239, "positive_f1": 0.6843100189035917, "precision": 0.6328671328671329, "recall": 0.7448559670781894, "threshold": 0.5066333413124084}
+2026-08-16 10:01:53,828 INFO OOF threshold calibration completed: E:\Paper\Code\bbp\outputs\cv5\vine_dedup_cv5_8020_seed42\oof_threshold_calibration

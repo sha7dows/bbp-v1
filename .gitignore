@@ -1,0 +1,6 @@
+# Python
+__pycache__/
+*.pyc
+
+# 数据集快照过大(约776MB),不入库;路径见 configs/vine_dedup_cv5_8020_seed42_pw1.5.ini
+data/

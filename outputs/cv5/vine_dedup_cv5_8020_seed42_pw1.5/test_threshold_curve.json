@@ -1,0 +1,58 @@
+{
+  "_purpose": "pw1.5 test-set ensemble threshold curve for final reporting (config locked)",
+  "source_run": "E:\\Paper\\Code\\bbp\\outputs\\cv5\\vine_dedup_cv5_8020_seed42_pw1.5",
+  "positive_class_weight": 1.5,
+  "global_epoch": 17,
+  "test_sessions": 194,
+  "positive_count": 61,
+  "thresholds": [
+    {
+      "threshold": 0.45,
+      "positive_f1": 0.7194244604316549,
+      "macro_f1": 0.7813989772037793,
+      "precision": 0.6410256410256411,
+      "recall": 0.819672131147541,
+      "auroc": 0.8519659805250832
+    },
+    {
+      "threshold": 0.5,
+      "positive_f1": 0.6976744186046512,
+      "macro_f1": 0.7735476340127503,
+      "precision": 0.6617647058823529,
+      "recall": 0.7377049180327869,
+      "auroc": 0.8519659805250832
+    },
+    {
+      "threshold": 0.52,
+      "positive_f1": 0.6666666666666666,
+      "macro_f1": 0.753180661577608,
+      "precision": 0.6461538461538462,
+      "recall": 0.6885245901639344,
+      "auroc": 0.8519659805250832
+    },
+    {
+      "threshold": 0.55,
+      "positive_f1": 0.6612903225806451,
+      "macro_f1": 0.751099706744868,
+      "precision": 0.6507936507936508,
+      "recall": 0.6721311475409836,
+      "auroc": 0.8519659805250832
+    },
+    {
+      "threshold": 0.58,
+      "positive_f1": 0.6446280991735538,
+      "macro_f1": 0.7417897050174884,
+      "precision": 0.65,
+      "recall": 0.639344262295082,
+      "auroc": 0.8519659805250832
+    },
+    {
+      "threshold": 0.6,
+      "positive_f1": 0.65,
+      "macro_f1": 0.7466417910447761,
+      "precision": 0.6610169491525424,
+      "recall": 0.639344262295082,
+      "auroc": 0.8519659805250832
+    }
+  ]
+}

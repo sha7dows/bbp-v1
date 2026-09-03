@@ -1,0 +1,25 @@
+{
+  "_purpose": "OOF threshold selection from fixed CV development folds; no final-test predictions are loaded",
+  "source_cv_run": "E:\\Paper\\Code\\bbp\\outputs\\cv5\\vine_dedup_cv5_8020_seed42",
+  "source_global_epoch": 17,
+  "folds": 5,
+  "development_sessions": 776,
+  "baseline_threshold": {
+    "threshold": 0.5,
+    "macro_f1": 0.7568922305764412,
+    "positive_f1": 0.680451127819549,
+    "precision": 0.6262975778546713,
+    "recall": 0.7448559670781894,
+    "auroc": 0.8287818775623653
+  },
+  "selected_threshold": {
+    "threshold": 0.5066333413124084,
+    "macro_f1": 0.7605323310549239,
+    "positive_f1": 0.6843100189035917,
+    "precision": 0.6328671328671329,
+    "recall": 0.7448559670781894,
+    "auroc": 0.8287818775623653
+  },
+  "selection_rule": "maximize OOF positive_f1, then macro_f1, then nearest threshold to 0.5",
+  "oof_auroc": 0.8287818775623653
+}
