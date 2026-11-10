@@ -1,0 +1,61 @@
+{
+  "purpose": "Functional compatibility, not robust-budget efficacy",
+  "training_indices": [
+    2,
+    6,
+    7,
+    8
+  ],
+  "checks": [
+    {
+      "mode": "bbp",
+      "min_tail_coverage": 0.8987727165222168,
+      "kept": {
+        "0": 4,
+        "1": 5,
+        "2": 6,
+        "3": 6
+      }
+    },
+    {
+      "mode": "node_control",
+      "min_tail_coverage": 0.8987727165222168,
+      "kept": {
+        "0": 4,
+        "1": 5,
+        "2": 6,
+        "3": 6
+      }
+    },
+    {
+      "mode": "node_detach",
+      "min_tail_coverage": 0.8987727165222168,
+      "kept": {
+        "0": 4,
+        "1": 5,
+        "2": 6,
+        "3": 6
+      }
+    },
+    {
+      "mode": "edge_control",
+      "min_tail_coverage": 0.8987727165222168,
+      "kept": {
+        "0": 4,
+        "1": 5,
+        "2": 6,
+        "3": 6
+      }
+    },
+    {
+      "mode": "edge_context",
+      "min_tail_coverage": 0.8987727165222168,
+      "kept": {
+        "0": 4,
+        "1": 5,
+        "2": 6,
+        "3": 6
+      }
+    }
+  ]
+}

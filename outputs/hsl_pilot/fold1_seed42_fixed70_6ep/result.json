@@ -1,0 +1,161 @@
+{
+  "protocol": "Exploratory single development-fold HSL ablation; final test not evaluated",
+  "arguments": {
+    "config": "configs/vine_hsl_server.ini",
+    "data": "/root/TRY/data/vine/KbertConfidence/processed/KbertConfidence_data_bert.pt",
+    "output": "/root/TRY/outputs/hsl_pilot/fold1_seed42_fixed70_6ep",
+    "epochs": 6,
+    "seed": 42,
+    "fold": 1,
+    "batch_size": 8,
+    "train_limit": 0,
+    "validation_limit": 0,
+    "ratio": 0.7,
+    "modes": [
+      "bbp",
+      "control",
+      "feedback",
+      "feedback_edit"
+    ],
+    "budget_mode": "fixed"
+  },
+  "config": {
+    "data": {
+      "dataset": "vine",
+      "processed_path": "/root/TRY/data/vine/KbertConfidence/processed/KbertConfidence_data_bert.pt",
+      "processed_sha256": "C50F3263CA28D156953414D9E4AD1CCF48FF0045A7867880636F3A2E99339548",
+      "expected_sessions": 970,
+      "expected_nodes": 68662,
+      "expected_features": 768
+    },
+    "split": {
+      "test_fraction": 0.2,
+      "validation_fraction": 0.0,
+      "seeds": [
+        42
+      ],
+      "stratified": true
+    },
+    "hypergraph": {
+      "tau": 0.1,
+      "threshold": 0.6,
+      "semantic_gate": 0.55,
+      "time_weight": 0.5,
+      "time_window_seconds": 86400.0,
+      "dedup_mode": "subset",
+      "dedup_jaccard_tau": 0.9
+    },
+    "model": {
+      "hidden_size": 128,
+      "dropout": 0.35,
+      "num_classes": 2,
+      "logit_adjustment": "paper",
+      "louvain_seed": 42,
+      "positive_class_weight": 1.5,
+      "confidence_weighting": "raw",
+      "hgnn_residual": false,
+      "edge_pooling": "sum",
+      "selector_dropout": 0.35,
+      "ibg_weight_mode": "jaccard",
+      "ibg_hard_tau": null
+    },
+    "pruning": {
+      "enabled": true,
+      "retention_ratio": 1.0,
+      "candidate_ratios": [
+        1.0,
+        0.9,
+        0.7,
+        0.5,
+        0.3
+      ],
+      "gumbel_temperature": 1.0,
+      "type_embedding_dim": 16,
+      "use_ibg_centrality": false,
+      "budget_mode": "fixed",
+      "coverage_threshold": 0.9,
+      "min_retention_ratio": 0.0,
+      "max_retention_ratio": 1.0,
+      "coverage_q": 0.2,
+      "coverage_tail_gamma": 0.85,
+      "coverage_eta": 0.25,
+      "lambda_fidelity": 0.5,
+      "lambda_comprehensiveness": 0.2,
+      "comprehensiveness_margin": 0.1,
+      "redundancy_lambda": 0.0
+    },
+    "training": {
+      "epochs": 20,
+      "batch_size": 8,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.005,
+      "device": "cuda:0",
+      "gamma_curriculum_enabled": false,
+      "gamma_curriculum_start": 0.9,
+      "gamma_curriculum_end_epoch": 8,
+      "checkpoint_soup_enabled": false,
+      "checkpoint_soup_top_k": 3,
+      "feature_noise_std": 0.0
+    }
+  },
+  "candidate_build_seconds": 36.02840782399289,
+  "large_edge_threshold_from_train": 63,
+  "modes": {
+    "bbp": {
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.5478824207859655,
+          "train_seconds": 57.906084125017514,
+          "validation": {
+            "positive_f1": 0.5652173913043478,
+            "macro_f1": 0.691699604743083,
+            "precision": 0.6046511627906976,
+            "recall": 0.5306122448979592,
+            "auroc": 0.753004005340454,
+            "edge_retention": 0.7096060815480304,
+            "member_retention_within_selected": 1.0,
+            "anchor_coverage": 0.6120073325358905,
+            "actual_structural_coverage": 0.5464786298764057,
+            "cached_graph_validation_seconds": 13.350571425020462,
+            "candidates": 7235.0,
+            "kept": 5134.0,
+            "selected_incidence": 214013.0,
+            "actual_incidence": 214013.0,
+            "edits": 0.0,
+            "changed": 0.0,
+            "coverage": 95.47314387559891,
+            "structural_coverage": 85.2506662607193
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.4704323572497214,
+          "train_seconds": 52.50352351999027,
+          "validation": {
+            "positive_f1": 0.5652173913043478,
+            "macro_f1": 0.691699604743083,
+            "precision": 0.6046511627906976,
+            "recall": 0.5306122448979592,
+            "auroc": 0.7802784665267977,
+            "edge_retention": 0.7096060815480304,
+            "member_retention_within_selected": 1.0,
+            "anchor_coverage": 0.9608365866618279,
+            "actual_structural_coverage": 0.9180696770930902,
+            "cached_graph_validation_seconds": 11.694420126004843,
+            "candidates": 7235.0,
+            "kept": 5134.0,
+            "selected_incidence": 173182.0,
+            "actual_incidence": 173182.0,
+            "edits": 0.0,
+            "changed": 0.0,
+            "coverage": 149.89050751924515,
+            "structural_coverage": 143.21886962652206
+          }
+        }
+      ],
+      "peak_memory_mb": 83.607421875,
+      "best_epoch": 1
+    }
+  }
+}

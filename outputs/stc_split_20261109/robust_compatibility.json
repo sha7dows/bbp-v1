@@ -1,0 +1,20 @@
+{
+  "purpose": "Original parent-tail coverage compatibility only; efficacy experiments use fixed budget; no child-tail guarantee",
+  "details": {
+    "none": {
+      "minimum_parent_tail_coverage": 0.8503315448760986,
+      "kept_parents": 129,
+      "propagation_edges": 129
+    },
+    "random": {
+      "minimum_parent_tail_coverage": 0.8503315448760986,
+      "kept_parents": 129,
+      "propagation_edges": 130
+    },
+    "semantic": {
+      "minimum_parent_tail_coverage": 0.8503315448760986,
+      "kept_parents": 129,
+      "propagation_edges": 130
+    }
+  }
+}

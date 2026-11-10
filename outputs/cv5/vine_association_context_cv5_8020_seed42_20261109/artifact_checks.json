@@ -1,0 +1,10 @@
+{
+  "folds": 5,
+  "epochs_per_fold": 20,
+  "prediction_files": 100,
+  "epoch_checkpoints": 100,
+  "selected_fold_checkpoints": 5,
+  "oof_sessions": 776,
+  "source_hashes_unchanged": true,
+  "final_test_evaluated": false
+}

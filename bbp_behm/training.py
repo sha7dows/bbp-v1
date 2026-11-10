@@ -140,7 +140,14 @@ def train_epoch(
             coverage_tail_gamma=coverage_tail_gamma,
             coverage_eta=coverage_eta,
         )
+        if hasattr(model, "association_scorer") and not bool(torch.isfinite(output.total_loss)):
+            raise RuntimeError("Non-finite association training loss")
         output.total_loss.backward()
+        # 关联模型正式运行时核验梯度有限，检查不改变优化数值。
+        if hasattr(model, "association_scorer"):
+            finite = torch.stack([torch.isfinite(p.grad).all() for p in model.parameters() if p.grad is not None]).all()
+            if not bool(finite):
+                raise RuntimeError("Non-finite association training gradient")
         optimizer.step()
         count = batch.num_graphs
         total_sessions += count
@@ -227,6 +234,7 @@ def evaluate(
     coverage_q: Optional[float] = None,
     coverage_tail_gamma: Optional[float] = None,
     coverage_eta: Optional[float] = None,
+    predictions_out: Optional[list] = None,
 ) -> Dict[str, float]:
     model.eval()
     effective_budget_mode = (
@@ -255,6 +263,11 @@ def evaluate(
     kept_stc_dup_sessions = 0
     kept_ibg_densities: list[float] = []
     kept_ibg_density_sessions = 0
+    association_count = 0.0
+    association_delta = 0.0
+    association_min = float("inf")
+    association_max = float("-inf")
+    association_mass_error = 0.0
 
     for cpu_batch in loader:
         batch: SessionBatch = cpu_batch.to(device)
@@ -277,6 +290,18 @@ def evaluate(
         labels.extend(batch.labels.detach().cpu().tolist())
         predictions.extend(torch.argmax(probabilities, dim=1).detach().cpu().tolist())
         positive_probabilities.extend(probabilities[:, 1].detach().cpu().tolist())
+        if predictions_out is not None:
+            predictions_out.extend({"index":int(i),"label":int(y),"positive_probability":float(p)}
+                for i,y,p in zip(batch.session_indices.cpu().tolist(),batch.labels.cpu().tolist(),
+                                  probabilities[:,1].detach().cpu().tolist()))
+        # 连续关联观测与二值保留量分开，避免把权重变化解释为成员增删。
+        stats = getattr(model,"last_association_stats",{})
+        if stats:
+            association_count += float(stats["association_count"])
+            association_delta += float(stats["association_abs_delta_sum"])
+            association_min = min(association_min,float(stats["association_weight_min"]))
+            association_max = max(association_max,float(stats["association_weight_max"]))
+            association_mass_error = max(association_mass_error,float(stats["association_row_mass_max_error"]))
         candidate_edges += hypergraph.num_edges
         candidate_incidence += float(hypergraph.incidence.sum().detach().cpu())
         for behavior_type in BehaviorType:
@@ -390,4 +415,9 @@ def evaluate(
         float(np.mean(kept_ibg_densities)) if kept_ibg_densities else 0.0
     )
     metrics["kept_ibg_density_sessions"] = float(kept_ibg_density_sessions)
+    if association_count:
+        metrics.update(association_count=association_count,
+            association_mean_abs_weight_delta=association_delta/association_count,
+            association_weight_min=association_min,association_weight_max=association_max,
+            association_row_mass_max_error=association_mass_error)
     return {key: float(value) for key, value in metrics.items()}

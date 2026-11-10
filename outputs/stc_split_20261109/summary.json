@@ -1,0 +1,54 @@
+{
+  "confirm_means": {
+    "none": {
+      "positive_f1": 0.6595744680851063,
+      "auroc": 0.8508566978193146,
+      "extra_incidence_fraction": 0.0,
+      "actual_structural_coverage": 0.9213437336106454,
+      "parent_size_mean": 35.18503184713376,
+      "propagation_size_mean": 35.18503184713376
+    },
+    "random": {
+      "positive_f1": 0.6523678792038434,
+      "auroc": 0.8487149532710281,
+      "extra_incidence_fraction": 0.011701683014835651,
+      "actual_structural_coverage": 0.9158750043761346,
+      "parent_size_mean": 35.224522292993626,
+      "propagation_size_mean": 32.24743329603811
+    },
+    "semantic": {
+      "positive_f1": 0.648936170212766,
+      "auroc": 0.8492990654205608,
+      "extra_incidence_fraction": 0.01167730670206335,
+      "actual_structural_coverage": 0.9167666814019604,
+      "parent_size_mean": 35.01656050955414,
+      "propagation_size_mean": 32.08093377912445
+    }
+  },
+  "comparisons": {
+    "none": {
+      "semantic_minus_control_mean_f1": -0.010638297872340385,
+      "conditional_stratified_bootstrap_95_ci": [
+        -0.029153913151673483,
+        0.0
+      ],
+      "changed_decisions": [
+        2,
+        0
+      ]
+    },
+    "random": {
+      "semantic_minus_control_mean_f1": -0.003431708991077531,
+      "conditional_stratified_bootstrap_95_ci": [
+        -0.011470687780521559,
+        0.0
+      ],
+      "changed_decisions": [
+        1,
+        0
+      ]
+    }
+  },
+  "interval_note": "Conditional on fitted models; paired validation resampling shares indices across seeds; not full training uncertainty",
+  "final_test_evaluated": false
+}

@@ -1,0 +1,36 @@
+{
+  "purpose": "Exploratory context screening and second-development-fold confirmation; final test never evaluated",
+  "split_seed": 42,
+  "fold_seed": 42,
+  "ratio": 0.7,
+  "batch_size": 8,
+  "screen": {
+    "fold": 1,
+    "seed": 42,
+    "epochs": 8,
+    "modes": [
+      "bbp",
+      "node_control",
+      "node_detach",
+      "edge_control",
+      "edge_context"
+    ]
+  },
+  "promotion": "Choose node_detach or edge_context by mean positive F1 over last three screening epochs; tie-break by mean AUROC. Preserve all screening results.",
+  "confirmation": {
+    "fold": 2,
+    "seeds": [
+      42,
+      43
+    ],
+    "epochs": 12,
+    "modes": "bbp + matched control + promoted candidate"
+  },
+  "limitations": [
+    "Final test excluded",
+    "Training seeds independent from fixed data split",
+    "Fold 2 reused for two training seeds, not two independent datasets",
+    "Fixed K, not the archived robust_adaptive performance protocol",
+    "No member editing in this round"
+  ]
+}

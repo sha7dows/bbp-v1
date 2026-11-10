@@ -1,0 +1,13 @@
+{
+  "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Mar 19 2026, 20:20:58) [GCC 14.3.0]",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "packages": {
+    "torch": "2.12.1+cu130",
+    "torch-geometric": "2.8.1",
+    "numpy": "2.4.4",
+    "scikit-learn": "1.9.1",
+    "networkx": "3.6.1",
+    "python-louvain": "0.16"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090, 595.91.07, 24564 MiB"
+}

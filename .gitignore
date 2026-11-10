@@ -1,7 +1,53 @@
-# Python
+# 用途：控制仓库上传范围，保留源码、文档和实验汇总，排除运行数据、凭据及大体积产物。
+# Python 与编辑器缓存
 __pycache__/
-*.pyc
-
-# 数据集快照过大(约776MB),不入库;路径见 configs/vine_dedup_cv5_8020_seed42_pw1.5.ini
-data/
-docs/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.venv/
+venv/
+.vscode/
+.idea/
+# 数据、备份与临时图形构建目录
+/data/
+/.backups/
+/.archify/
+# 认证文件与本机配置
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+*credentials*
+server_known_hosts
+# 新生成的权重与压缩包；历史已跟踪文件继续保留，不改写仓库历史
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.pickle
+*.npz
+*.npy
+*.tar
+*.tgz
+*.zip
+*.bundle
+# 运行日志及进程文件
+*.log
+**/*pid.txt
+# 实验目录只收录可阅读的文档、统计与复现信息
+/outputs/**
+!/outputs/**/
+!/outputs/**/*.md
+!/outputs/**/*.json
+!/outputs/**/*.csv
+!/outputs/**/*.ini
+!/outputs/**/*.py
+/outputs/**/*predictions*.json
+/outputs/**/*predictions*.csv
+/outputs/**/provenance.json
+/outputs/**/diagnostic.json
+# 逐轮预测文件的目录名与文件名两种组织方式均排除
+/outputs/**/validation_predictions/
+/outputs/**/oof_predictions/

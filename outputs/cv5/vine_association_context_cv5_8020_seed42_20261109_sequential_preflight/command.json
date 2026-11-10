@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "python",
+    "scripts/train_vine_cv5.py",
+    "--config",
+    "configs/vine_association_cv5_server.ini",
+    "--mode",
+    "bbp",
+    "--architecture",
+    "association",
+    "--association-mode",
+    "context",
+    "--association-alpha",
+    "0.2",
+    "--cache-graphs",
+    "--torch-threads",
+    "4",
+    "--seed",
+    "42",
+    "--run-name",
+    "vine_association_context_cv5_8020_seed42_20261109"
+  ],
+  "cwd": "/root/TRY",
+  "started_at": "2026-11-09T13:03:29.656893+00:00"
+}

@@ -1,0 +1,1 @@
+{"fold": 1, "epochs": 1, "model_options": {"architecture": "association", "association_mode": "context", "association_alpha": 0.2}, "final_test_evaluated": false}

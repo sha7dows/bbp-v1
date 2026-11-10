@@ -1,0 +1,133 @@
+{
+  "arguments": {
+    "output": "outputs/stc_split_20261109/smoke_fold1_seed42",
+    "fold": 1,
+    "seed": 42,
+    "epochs": 1,
+    "prepare_only": false,
+    "modes": [
+      "semantic"
+    ]
+  },
+  "thresholds": {
+    "size": 63,
+    "dispersion": 0.36331565525955795,
+    "minimum_gain": 0.01,
+    "maximum_anchor_count": 4,
+    "maximum_extra_incidence_fraction": 0.1
+  },
+  "config": {
+    "data": {
+      "dataset": "vine",
+      "processed_path": "/root/TRY/data/vine/KbertConfidence/processed/KbertConfidence_data_bert.pt",
+      "processed_sha256": "C50F3263CA28D156953414D9E4AD1CCF48FF0045A7867880636F3A2E99339548",
+      "expected_sessions": 970,
+      "expected_nodes": 68662,
+      "expected_features": 768
+    },
+    "split": {
+      "test_fraction": 0.2,
+      "validation_fraction": 0.0,
+      "seeds": [
+        42
+      ],
+      "stratified": true
+    },
+    "hypergraph": {
+      "tau": 0.1,
+      "threshold": 0.6,
+      "semantic_gate": 0.55,
+      "time_weight": 0.5,
+      "time_window_seconds": 86400.0,
+      "dedup_mode": "subset",
+      "dedup_jaccard_tau": 0.9
+    },
+    "model": {
+      "hidden_size": 128,
+      "dropout": 0.35,
+      "num_classes": 2,
+      "logit_adjustment": "paper",
+      "louvain_seed": 42,
+      "positive_class_weight": 1.5,
+      "confidence_weighting": "raw",
+      "hgnn_residual": false,
+      "edge_pooling": "sum",
+      "selector_dropout": 0.35,
+      "ibg_weight_mode": "jaccard",
+      "ibg_hard_tau": null
+    },
+    "pruning": {
+      "enabled": true,
+      "retention_ratio": 1.0,
+      "candidate_ratios": [
+        1.0,
+        0.9,
+        0.7,
+        0.5,
+        0.3
+      ],
+      "gumbel_temperature": 1.0,
+      "type_embedding_dim": 16,
+      "use_ibg_centrality": false,
+      "budget_mode": "fixed",
+      "coverage_threshold": 0.9,
+      "min_retention_ratio": 0.0,
+      "max_retention_ratio": 1.0,
+      "coverage_q": 0.2,
+      "coverage_tail_gamma": 0.85,
+      "coverage_eta": 0.25,
+      "lambda_fidelity": 0.5,
+      "lambda_comprehensiveness": 0.2,
+      "comprehensiveness_margin": 0.1,
+      "redundancy_lambda": 0.0
+    },
+    "training": {
+      "epochs": 20,
+      "batch_size": 8,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.005,
+      "device": "cuda:0",
+      "gamma_curriculum_enabled": false,
+      "gamma_curriculum_start": 0.9,
+      "gamma_curriculum_end_epoch": 8,
+      "checkpoint_soup_enabled": false,
+      "checkpoint_soup_top_k": 3,
+      "feature_noise_std": 0.0
+    }
+  },
+  "final_test_evaluated": false,
+  "modes": {
+    "semantic": {
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.5477381165950529,
+          "train_seconds": 15.848854963987833,
+          "validation": {
+            "positive_f1": 0.5652173913043478,
+            "macro_f1": 0.691699604743083,
+            "precision": 0.6046511627906976,
+            "recall": 0.5306122448979592,
+            "auroc": 0.7604424947549113,
+            "parent_size_mean": 41.66225165562914,
+            "propagation_size_mean": 37.15846338535414,
+            "extra_incidence_fraction": 0.012983066378673636,
+            "parent_anchor_coverage": 0.6083021238446236,
+            "actual_structural_coverage": 0.5384994498812236,
+            "validation_seconds": 3.1572836720151827,
+            "parent_candidates": 7235.0,
+            "kept_parents": 5134.0,
+            "propagation_edges": 5831.0,
+            "parent_incidence": 213894.0,
+            "propagation_incidence": 216671.0,
+            "split_kept_parents": 697.0,
+            "anchor_coverage": 94.89513131976128,
+            "actual_jaccard_coverage": 84.00591418147087,
+            "propagation_max_size": 185.0
+          }
+        }
+      ],
+      "peak_memory_mb": 127.2294921875
+    }
+  }
+}

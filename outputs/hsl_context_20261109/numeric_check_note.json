@@ -1,0 +1,5 @@
+{
+  "failure_max_abs_logit_difference": 1.1920928955078125e-07,
+  "change": "Require exact hard-mask equality and logits atol=rtol=1e-6; training algorithm and selection rule unchanged",
+  "failed_before_training": true
+}

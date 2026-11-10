@@ -1,0 +1,543 @@
+{
+  "_purpose": "Verified source, report, model, config and result evidence for the agent handoff; no training performed",
+  "prepared_date": "2026-11-10",
+  "timezone": "Asia/Shanghai",
+  "root": "/root/TRY",
+  "report": "/root/TRY/work/AGENT_HANDOFF.md",
+  "report_sha256": "13f3a653ffd38560764de8bd5505b7c587ae5812ce6de954084dd1ae5d4a9623",
+  "dataset_sha256_verified": true,
+  "latest_training_sources_unchanged": true,
+  "self_manifest_not_hashed": true,
+  "entries": [
+    {
+      "path": "/root/TRY",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/.backups/pre_association_cv5_20261109.tgz",
+      "kind": "file",
+      "size_bytes": 2210804,
+      "sha256": "9e4fc97afb607c929a9f528a8758ea0ce7ffc4dfc99e7fc8a2e67d136480631d"
+    },
+    {
+      "path": "/root/TRY/.backups/pre_context_20261109.tgz",
+      "kind": "file",
+      "size_bytes": 7220,
+      "sha256": "2b0ae2773d354865a90f709ec5c60088bc406b4d08b4c57f059e7defc55b2f74"
+    },
+    {
+      "path": "/root/TRY/.backups/pre_hsl_20261109.tgz",
+      "kind": "file",
+      "size_bytes": 31509,
+      "sha256": "780e30c9ea5c9f84d1e094d236b9de7f9eb2a73d1a7fa7d37c3a2bff571137c9"
+    },
+    {
+      "path": "/root/TRY/.backups/pre_split_20261109.tgz",
+      "kind": "file",
+      "size_bytes": 2161374,
+      "sha256": "12707bc3c05a1cce57e3aa3773cb45cb9766c610b55116163fe4eec2c7e624b7"
+    },
+    {
+      "path": "/root/TRY/AGENTS.md",
+      "kind": "file",
+      "size_bytes": 1815,
+      "sha256": "1e769dd3000bea2467349e1828ab668dcad6baba4b646e39a0152c6dadec61b4"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/backbone.py",
+      "kind": "file",
+      "size_bytes": 19612,
+      "sha256": "0dd4a478796469c46f4276f3a700b70525089c802f5de28044f53e4d6e34ad56"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/cached_hypergraph.py",
+      "kind": "file",
+      "size_bytes": 1685,
+      "sha256": "2f7e06cb835ce236c1f8509456c1224e5901bab7a1757432a539d8483f72fb7e"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/data.py",
+      "kind": "file",
+      "size_bytes": 9776,
+      "sha256": "d4e8401ff8cfd54316ac5594b975af4a2039545a4255c57e02d9cadf58cd18c8"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/hsl.py",
+      "kind": "file",
+      "size_bytes": 5086,
+      "sha256": "ed9e6e833fcbe366a0a2652b6f14827d8046fd764132d33a8aa5e677b70130a4"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/hsl_association.py",
+      "kind": "file",
+      "size_bytes": 4237,
+      "sha256": "ef8da294dbc697371738ab0b53ba550bd54ccfd42c478db9470e8f12e6966b10"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/hsl_context.py",
+      "kind": "file",
+      "size_bytes": 5690,
+      "sha256": "e253e6b7893e92208fabdf0b278b33ebea869a7269f8f9d5363c0023d2ebc205"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/hsl_split.py",
+      "kind": "file",
+      "size_bytes": 8423,
+      "sha256": "07591042f1551c1b122bb626b4c27934aa162ab6dbc445fb010d39f990a7c66f"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/hypergraph.py",
+      "kind": "file",
+      "size_bytes": 13663,
+      "sha256": "3e3f86964f75f59b64d66c76f2d054dec077a88d6f43e4b0f707da67a917208e"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/model.py",
+      "kind": "file",
+      "size_bytes": 12538,
+      "sha256": "0902fa3af5c03b4704886dc63b65b63bbe2da429b2efc506c46ee61456161adf"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/selector.py",
+      "kind": "file",
+      "size_bytes": 35121,
+      "sha256": "7e9bccc21f0c790b0c1b1d4034220bd37dc25403f86f863b969b24fbd5d1ce1b"
+    },
+    {
+      "path": "/root/TRY/bbp_behm/training.py",
+      "kind": "file",
+      "size_bytes": 18576,
+      "sha256": "627dcb2cfb8f8712c96b3a0fd62d8faf0137b526ff938d065d3f081fac057a71"
+    },
+    {
+      "path": "/root/TRY/configs/vine_association_cv5_server.ini",
+      "kind": "file",
+      "size_bytes": 1618,
+      "sha256": "5031314e55ba71d0363bc09b7308062eb69f1e07b10615bede4b8bdac6d6729a"
+    },
+    {
+      "path": "/root/TRY/configs/vine_dedup_cv5_8020_seed42_pw1.5.ini",
+      "kind": "file",
+      "size_bytes": 1884,
+      "sha256": "67d0daaada5c4603856f69ee3af30a15b145e187e20e0d0777b8cad4985fd52b"
+    },
+    {
+      "path": "/root/TRY/configs/vine_hsl_server.ini",
+      "kind": "file",
+      "size_bytes": 1599,
+      "sha256": "e42c3546a8e117ab9203f3541dd358f0ef718477872593af5b2f9dfc7c1cc102"
+    },
+    {
+      "path": "/root/TRY/data/vine/KbertConfidence/processed/KbertConfidence_data_bert.pt",
+      "kind": "file",
+      "size_bytes": 225865490,
+      "sha256": "c50f3263ca28d156953414d9e4ad1ccf48ff0045a7867880636f3a2e99339548"
+    },
+    {
+      "path": "/root/TRY/docs/Paper3008#Behavior-driven Hypergraph Modeling for Accurate Cyberbullying Detection in Social Media.pdf",
+      "kind": "file",
+      "size_bytes": 643653,
+      "sha256": "8a245cb1566a67cb49b91456a45a0026a45465005a5e64b853bd24b36f636b51"
+    },
+    {
+      "path": "/root/TRY/docs/bbp_hsl_research_notes_20261109.md",
+      "kind": "file",
+      "size_bytes": 9247,
+      "sha256": "b17edd57f60526392c51aab0f3f417deb775d540a4af46c3edd956182ebb99b8"
+    },
+    {
+      "path": "/root/TRY/docs/hsl_association_cv5.md",
+      "kind": "file",
+      "size_bytes": 3212,
+      "sha256": "5baafd34a812049ce792c1a58ffbd1a35e8c3abcd33d7a9d2c2f779f75971ccf"
+    },
+    {
+      "path": "/root/TRY/docs/hsl_structure_refocus.md",
+      "kind": "file",
+      "size_bytes": 4026,
+      "sha256": "2ce058235191bcc4a8d95d3defb3c6c602512a1247e1f17aaab01b950f3ce3db"
+    },
+    {
+      "path": "/root/TRY/outputs/association_checks_20261109",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/association_worker_smoke_20261109",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/REPORT.md",
+      "kind": "file",
+      "size_bytes": 4006,
+      "sha256": "39598ecd887eb2b8a47e4b239f3481acdc2f9b5c0693acf1e2febb90d9b07510"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/artifact_checks.json",
+      "kind": "file",
+      "size_bytes": 221,
+      "sha256": "c2f565f33c0669234e2eae1f68b6cefb923e9cae838a788ca26f3cd274f320ea"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/command.json",
+      "kind": "file",
+      "size_bytes": 3750,
+      "sha256": "0d43e8520fdaa3f79308abc0121a56996122ee91b8bfcb40f618efe76dafc7db"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/ensemble_model.pt",
+      "kind": "file",
+      "size_bytes": 7119363,
+      "sha256": "a5686af304d5db6c6caacc18377da34d9adf062bf2617d0e67a0c184f733b377"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/environment.json",
+      "kind": "file",
+      "size_bytes": 291,
+      "sha256": "59fa10334f5b0d0cfbafa8e5971b91437d3a709e1829de93d35adc412e0622ef"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/evaluate_final_frozen.py",
+      "kind": "file",
+      "size_bytes": 7568,
+      "sha256": "18d5b5dffccfcda24f86c640b2a1423dc1a1b05c9bccd6b03cda186d3a7a95c2"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/final_test_evaluation",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/final_test_evaluation/REPORT.md",
+      "kind": "file",
+      "size_bytes": 838,
+      "sha256": "00b729a91c1af6fc5b9fb0690bbfdc88a566cbdbe058a902a585b009008fb802"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/final_test_evaluation/result.json",
+      "kind": "file",
+      "size_bytes": 3952,
+      "sha256": "868785ec452ac69f2923730180eb45f7822204ffb05d4daf17e78fde06a673c1"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/fold_checkpoints",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/fold_checkpoints/fold_01_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1423493,
+      "sha256": "631840aa0025a1e5e0d2a960a5b610f8e0d0e4636caff89a5240f658503ff1cb"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/fold_checkpoints/fold_02_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1423493,
+      "sha256": "a6624da0ae9e856118822e55237cc479a3fc023bc7882a9867a327a618b998a1"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/fold_checkpoints/fold_03_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1423493,
+      "sha256": "1ac2e09aadb0830b33c030396d9625655c52833f7d4e26a7285dac0e7297b494"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/fold_checkpoints/fold_04_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1423493,
+      "sha256": "27093993a4453db7936721c52901c61a0bb313cd805312ab197ba0b1cc198a88"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/fold_checkpoints/fold_05_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1423493,
+      "sha256": "beb2a2b30dc15ad366eff7ac2c687d76db994674b2a3fefd227ffe797e3add97"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/preflight_checks.json",
+      "kind": "file",
+      "size_bytes": 2571,
+      "sha256": "8524ea9f87316c6c6b154c1e39bc8513284cd6f17607c39d3d0992c0bfc7b5cf"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/result.json",
+      "kind": "file",
+      "size_bytes": 22985,
+      "sha256": "a73a577ad7eea829fbf702c8b80ff610abfe724ac18b40a3133f1db382f43145"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/run_status.json",
+      "kind": "file",
+      "size_bytes": 112,
+      "sha256": "c0a5313e5daa053cdd2d84388a26fb3c0f8304d0b0ede698367a5235f131151f"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/source_hashes.json",
+      "kind": "file",
+      "size_bytes": 6368,
+      "sha256": "526b9d00bccf8e1ade0d21d267004df80252c2d4cb846f58b06d2159df12a51e"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/split.json",
+      "kind": "file",
+      "size_bytes": 60594,
+      "sha256": "514244f3e05254e98b5d39d52303bc21646a06225b54e0567c76f2970f0243d1"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/summary.json",
+      "kind": "file",
+      "size_bytes": 2347,
+      "sha256": "197578e2018953a3795d0ce1171f249c291728ca11b39195ac4e47cd8afb23f0"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109/trained_replay_audit.json",
+      "kind": "file",
+      "size_bytes": 1958,
+      "sha256": "f1ed856ca2a2a28410512517348f7e53d359137cebaa3af89f82659d74550e6e"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_association_context_cv5_8020_seed42_20261109_sequential_preflight",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5/ensemble_model.pt",
+      "kind": "file",
+      "size_bytes": 5792708,
+      "sha256": "5e7e4fc983fefd71b51d775652bf13cb85b0752dc8896e672263b7ed4173ace2"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5/fold_checkpoints/fold_01_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1158472,
+      "sha256": "5cfc93e64b02f6a9ff4b40a8a19bc00fd45dfda0da024b5aa858d5672b1f50cb"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5/fold_checkpoints/fold_02_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1158472,
+      "sha256": "7757eaf9cb422b3c861db0a943c18473f091b5dcb38e946df9c6b1facabd128c"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5/fold_checkpoints/fold_03_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1158472,
+      "sha256": "fc413c2d7ad347a155bbae71eb5e76e40fe9b743c0a0fda1246fc8f999499c3e"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5/fold_checkpoints/fold_04_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1158472,
+      "sha256": "3f7c0c5703c9a58caf45feb005c9b6ac526e719637e1c2e188d3dcf6446db553"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5/fold_checkpoints/fold_05_epoch_017.pt",
+      "kind": "file",
+      "size_bytes": 1158472,
+      "sha256": "e98d076b8a4a71b0be8ae21b9349cff7a6050cffd1c27eeaf81df81736e180f5"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5/result.json",
+      "kind": "file",
+      "size_bytes": 20272,
+      "sha256": "f77d9b1435fc76cf7c80c00659580c7e09d416bf6792727fa8de1bc467c17369"
+    },
+    {
+      "path": "/root/TRY/outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5/split.json",
+      "kind": "file",
+      "size_bytes": 60594,
+      "sha256": "514244f3e05254e98b5d39d52303bc21646a06225b54e0567c76f2970f0243d1"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_context_20261109",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_context_20261109/REPORT.md",
+      "kind": "file",
+      "size_bytes": 4642,
+      "sha256": "efd1a2d5ea51e1d02944304bf05ae84ec9e0a6868a2c2315e95e58a3a989e564"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_context_20261109/artifact_checks.json",
+      "kind": "file",
+      "size_bytes": 1598,
+      "sha256": "f31a17622684832fdecd13257f539e6f19c30c693fd85276422e9a5e53b0dd7c"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_context_20261109/confirm_fold2_seed42_numeric_check_failed",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_context_20261109/environment.json",
+      "kind": "file",
+      "size_bytes": 407,
+      "sha256": "3a77564fa8b9c298ffae3ed8a0932655687e5c1c219584735451d0fd6e9ab3a7"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_context_20261109/status.json",
+      "kind": "file",
+      "size_bytes": 116,
+      "sha256": "4b6bff643e6f835e65ad610a9269cbdd04375cf9382a0eb64c83b86de4718149"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_context_20261109/summary.json",
+      "kind": "file",
+      "size_bytes": 5635,
+      "sha256": "cdc99393edac4f63ac982d55c06b4f9d04d1e19c3ada99ed7c9a7b7f81bf59f7"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_pilot/fold1_seed42_fixed70_6ep",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_pilot/fold1_seed42_fixed70_6ep_v2",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_pilot/fold1_seed42_fixed70_6ep_v2/REPORT.md",
+      "kind": "file",
+      "size_bytes": 3225,
+      "sha256": "c3e294abe220913531b8def0684f800a1f0a0b54768204a7a196fccaf32bfd6e"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_pilot/fold1_seed42_fixed70_6ep_v2/environment.json",
+      "kind": "file",
+      "size_bytes": 157,
+      "sha256": "1871ce3d885fb8e918bad77ac742cd6fd0d1937f921b2ee3df596c248692895e"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_pilot/fold1_seed42_fixed70_6ep_v2/result.json",
+      "kind": "file",
+      "size_bytes": 26663,
+      "sha256": "1379f66ea6d55d34d4a0994198fc6342a1a53e6c22b3d2b1c3b115f3afb4bbea"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_pilot/fold1_seed42_fixed70_6ep_v2/split.json",
+      "kind": "file",
+      "size_bytes": 8810,
+      "sha256": "23f145938f12e1d58f19d1e65c50f5fc5e016ee0b066d598f702747875db2d7a"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_pilot/fold1_seed42_fixed70_6ep_v2/summary.json",
+      "kind": "file",
+      "size_bytes": 3116,
+      "sha256": "f98df3c3feb09b77613b90d7345027936589420501090dac1f732d4666759e8f"
+    },
+    {
+      "path": "/root/TRY/outputs/hsl_pilot/preflight",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/outputs/stc_split_20261109/REPORT.md",
+      "kind": "file",
+      "size_bytes": 4101,
+      "sha256": "10c88da2a9e23d1563b1890421481d663cd44a7b412206cc8965c860e00dfd1b"
+    },
+    {
+      "path": "/root/TRY/outputs/stc_split_20261109/artifact_checks.json",
+      "kind": "file",
+      "size_bytes": 92,
+      "sha256": "0ba6bda6e4de7eb01a4382a9591d1bd54378749f935912f9970e6a9f15648a0a"
+    },
+    {
+      "path": "/root/TRY/outputs/stc_split_20261109/source_hashes.json",
+      "kind": "file",
+      "size_bytes": 5637,
+      "sha256": "f4ac3260c933b8c1167911bf720db36be1614d704789cc5cbcbb4f125673cf4c"
+    },
+    {
+      "path": "/root/TRY/outputs/stc_split_20261109/status.json",
+      "kind": "file",
+      "size_bytes": 112,
+      "sha256": "6f32c612c98594f1d25993d2c1407a52c9578d9b8cdbbd64858375d2db189b74"
+    },
+    {
+      "path": "/root/TRY/outputs/stc_split_20261109/summary.json",
+      "kind": "file",
+      "size_bytes": 1610,
+      "sha256": "bac84cfcd91fe7b04835e7e404a5eb8bd721c68947beaaef9b16efdbf29e6e42"
+    },
+    {
+      "path": "/root/TRY/scripts/check_hsl_association.py",
+      "kind": "file",
+      "size_bytes": 6544,
+      "sha256": "1ca1d471204255b2be1e57563e43dce2eb8a673cc19de90bc95b9e353bb18f5b"
+    },
+    {
+      "path": "/root/TRY/scripts/check_hsl_context.py",
+      "kind": "file",
+      "size_bytes": 2900,
+      "sha256": "9cd07a4aafe4d84bf290aac0695fc0e69c18b5dc069c8f932e6a0e1b7c6390db"
+    },
+    {
+      "path": "/root/TRY/scripts/check_hsl_invariants.py",
+      "kind": "file",
+      "size_bytes": 2768,
+      "sha256": "8aade41d8cf0bc68ee59ce4bdd9a95664375ec3452c645aa4763ed98f28348a4"
+    },
+    {
+      "path": "/root/TRY/scripts/run_association_cv5.py",
+      "kind": "file",
+      "size_bytes": 9478,
+      "sha256": "2b687a2db861c4c9ffed5bed540107078286d8d9a03fb9441da6f82f05882e20"
+    },
+    {
+      "path": "/root/TRY/scripts/run_hsl_context_study.py",
+      "kind": "file",
+      "size_bytes": 4820,
+      "sha256": "b33711bbc6914751e43a8af93fd313a9e6c681ac1f766fbbce386181d58c7df1"
+    },
+    {
+      "path": "/root/TRY/scripts/run_stc_split_study.py",
+      "kind": "file",
+      "size_bytes": 8526,
+      "sha256": "d021d81acd462ac774c6a3c3d052ffa64741a8b88615c32b84fd30f19ef3e549"
+    },
+    {
+      "path": "/root/TRY/scripts/train_hsl_pilot.py",
+      "kind": "file",
+      "size_bytes": 16472,
+      "sha256": "d4ee7c757453b64aed5d89bd8b2ce199c9a74a3c400fc94c9bb31953307d6d79"
+    },
+    {
+      "path": "/root/TRY/scripts/train_vine_cv5.py",
+      "kind": "file",
+      "size_bytes": 29997,
+      "sha256": "5b9513fd54b39e7904b24350926edc4a8d604ef50fccf5c73658a95bf5a8e6bb"
+    },
+    {
+      "path": "/root/TRY/work",
+      "kind": "directory"
+    },
+    {
+      "path": "/root/TRY/work/AGENT_HANDOFF.md",
+      "kind": "file",
+      "size_bytes": 42186,
+      "sha256": "13f3a653ffd38560764de8bd5505b7c587ae5812ce6de954084dd1ae5d4a9623"
+    },
+    {
+      "path": "/root/TRY/work/behm_paper_extracted.txt",
+      "kind": "file",
+      "size_bytes": 33700,
+      "sha256": "53a165785352be9afd7e447aaca355d0a6cc4e17905b42220354f9e2f2e7abef"
+    },
+    {
+      "path": "/root/TRY/work/pdf_reader_setup.log",
+      "kind": "file",
+      "size_bytes": 202,
+      "sha256": "144eaf195b1b8823d1ef15d48336afe669e73851287ee56342f0993469243139"
+    },
+    {
+      "path": "/root/TRY/work/verified_experiment_facts.json",
+      "kind": "file",
+      "size_bytes": 31733,
+      "sha256": "63c585ddacd3bcfd1b9aae24894cde45b444686dbbbeb59ef4266c8ac8032b92"
+    }
+  ]
+}

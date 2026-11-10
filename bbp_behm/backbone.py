@@ -162,11 +162,12 @@ class CommunityFeatureExtractor(nn.Module):
 
         graph = nx.Graph()
         graph.add_nodes_from(range(count))
-        for position in range(edge_index.size(1)):
-            source = int(edge_index[0, position].item())
-            target = int(edge_index[1, position].item())
+        # 一次性搬运拓扑和权重，避免每条 IBG 关系触发 GPU/CPU 同步；插入顺序保持不变。
+        pairs = edge_index.t().detach().cpu().tolist()
+        weights = edge_weight.detach().cpu().tolist()
+        for (source, target), weight in zip(pairs, weights):
             if source <= target:
-                graph.add_edge(source, target, weight=float(edge_weight[position].detach().cpu().item()))
+                graph.add_edge(source, target, weight=float(weight))
         partition = community_louvain.best_partition(
             graph, weight="weight", random_state=self.random_seed
         )
@@ -348,7 +349,12 @@ class BeHMBackbone(nn.Module):
         num_sessions: int,
         labels: Optional[Tensor] = None,
         confidences: Optional[Tensor] = None,
+        topology_incidence: Optional[Tensor] = None,
     ) -> BackboneOutput:
+        # 传播关联可以连续加权；IBG集合拓扑由独立输入提供，默认兼容旧调用。
+        topology = incidence if topology_incidence is None else topology_incidence
+        if topology.shape != incidence.shape:
+            raise ValueError("Topology and propagation incidence shapes differ")
         propagated_nodes, all_edge_features = self.hgnn(projected_nodes, incidence)
         node_sequences: List[Tensor] = []
         edge_sequences: List[Tensor] = []
@@ -369,7 +375,7 @@ class BeHMBackbone(nn.Module):
                 ibg_edge_counts.append(0)
                 continue
 
-            session_incidence = incidence[session_edges]
+            session_incidence = topology[session_edges]
             session_features = all_edge_features[session_edges]
             edge_index, edge_weight = self.build_ibg(
                 session_incidence, self.ibg_weight_mode, self.ibg_hard_tau

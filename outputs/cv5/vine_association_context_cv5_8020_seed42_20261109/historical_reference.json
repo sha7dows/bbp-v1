@@ -1,0 +1,8 @@
+{
+  "purpose": "Historical reference only; same split but not a matched same-environment training comparison",
+  "archived_result": "outputs/cv5/vine_dedup_cv5_8020_seed42_pw1.5/result.json",
+  "historical_positive_f1": 0.6728578300159243,
+  "current_positive_f1": 0.6691858682629193,
+  "current_minus_historical": -0.003671961753004993,
+  "mean_abs_association_weight_delta": 0.0013898586073099177
+}

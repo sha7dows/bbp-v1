@@ -1,0 +1,608 @@
+{
+  "bbp": {
+    "purpose": "Training-only balanced-case sensitivity diagnostic, not validation performance",
+    "cases": [
+      {
+        "index": 2,
+        "label": 0,
+        "selected_probability": 0.19829720258712769,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 6,
+        "label": 0,
+        "selected_probability": 0.027140242978930473,
+        "random_probability_std": 0.0022057148162275553,
+        "mean_absolute_probability_change": 0.005787795875221491,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 8,
+        "label": 0,
+        "selected_probability": 0.037345048040151596,
+        "random_probability_std": 0.0036553128156811,
+        "mean_absolute_probability_change": 0.008562520146369934,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 9,
+        "label": 0,
+        "selected_probability": 0.023239081725478172,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 10,
+        "label": 0,
+        "selected_probability": 0.020480269566178322,
+        "random_probability_std": 0.00029615158564411104,
+        "mean_absolute_probability_change": 0.00022939802147448063,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 11,
+        "label": 0,
+        "selected_probability": 0.022501783445477486,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 13,
+        "label": 0,
+        "selected_probability": 0.027354633435606956,
+        "random_probability_std": 0.0004050819843541831,
+        "mean_absolute_probability_change": 0.0004050633870065212,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 15,
+        "label": 0,
+        "selected_probability": 0.018911754712462425,
+        "random_probability_std": 0.00040224287658929825,
+        "mean_absolute_probability_change": 0.00029923138208687305,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 18,
+        "label": 0,
+        "selected_probability": 0.15937620401382446,
+        "random_probability_std": 0.003189197275787592,
+        "mean_absolute_probability_change": 0.003507472574710846,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 20,
+        "label": 0,
+        "selected_probability": 0.38234859704971313,
+        "random_probability_std": 0.06522750854492188,
+        "mean_absolute_probability_change": 0.16826501488685608,
+        "decision_flip_fraction": 0.875
+      },
+      {
+        "index": 24,
+        "label": 0,
+        "selected_probability": 0.03039170242846012,
+        "random_probability_std": 0.005534900352358818,
+        "mean_absolute_probability_change": 0.004638139624148607,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 27,
+        "label": 0,
+        "selected_probability": 0.025766609236598015,
+        "random_probability_std": 0.003219848731532693,
+        "mean_absolute_probability_change": 0.004223003052175045,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 7,
+        "label": 1,
+        "selected_probability": 0.8828679919242859,
+        "random_probability_std": 0.02585417404770851,
+        "mean_absolute_probability_change": 0.0200265571475029,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 21,
+        "label": 1,
+        "selected_probability": 0.826654851436615,
+        "random_probability_std": 0.020303942263126373,
+        "mean_absolute_probability_change": 0.03870489448308945,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 29,
+        "label": 1,
+        "selected_probability": 0.7438011765480042,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 30,
+        "label": 1,
+        "selected_probability": 0.6414275169372559,
+        "random_probability_std": 0.032500263303518295,
+        "mean_absolute_probability_change": 0.05618347227573395,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 31,
+        "label": 1,
+        "selected_probability": 0.9114570021629333,
+        "random_probability_std": 0.006186991930007935,
+        "mean_absolute_probability_change": 0.006186991930007935,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 33,
+        "label": 1,
+        "selected_probability": 0.7873018383979797,
+        "random_probability_std": 0.04542754963040352,
+        "mean_absolute_probability_change": 0.07753059267997742,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 35,
+        "label": 1,
+        "selected_probability": 0.559515118598938,
+        "random_probability_std": 0.03174054995179176,
+        "mean_absolute_probability_change": 0.11230786144733429,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 41,
+        "label": 1,
+        "selected_probability": 0.8989448547363281,
+        "random_probability_std": 0.003594262059777975,
+        "mean_absolute_probability_change": 0.0194409117102623,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 42,
+        "label": 1,
+        "selected_probability": 0.8477606177330017,
+        "random_probability_std": 0.008072991855442524,
+        "mean_absolute_probability_change": 0.011560961604118347,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 43,
+        "label": 1,
+        "selected_probability": 0.8189890384674072,
+        "random_probability_std": 0.011816969141364098,
+        "mean_absolute_probability_change": 0.09272120893001556,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 47,
+        "label": 1,
+        "selected_probability": 0.9608393311500549,
+        "random_probability_std": 0.0006938638398423791,
+        "mean_absolute_probability_change": 0.0009788647294044495,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 48,
+        "label": 1,
+        "selected_probability": 0.7315977215766907,
+        "random_probability_std": 0.019981009885668755,
+        "mean_absolute_probability_change": 0.1089448481798172,
+        "decision_flip_fraction": 0.0
+      }
+    ],
+    "mean_absolute_probability_change": 0.03085436683613807,
+    "mean_random_probability_std": 0.012096188620489556,
+    "mean_decision_flip_fraction": 0.036458333333333336,
+    "mean_score_gradient_abs": 0.003582198691826003,
+    "mean_context_delta_abs": null
+  },
+  "node_detach": {
+    "purpose": "Training-only balanced-case sensitivity diagnostic, not validation performance",
+    "cases": [
+      {
+        "index": 2,
+        "label": 0,
+        "selected_probability": 0.19689251482486725,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 6,
+        "label": 0,
+        "selected_probability": 0.027037296444177628,
+        "random_probability_std": 0.002173307118937373,
+        "mean_absolute_probability_change": 0.005699041299521923,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 8,
+        "label": 0,
+        "selected_probability": 0.03708985075354576,
+        "random_probability_std": 0.0036065818276256323,
+        "mean_absolute_probability_change": 0.008156831376254559,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 9,
+        "label": 0,
+        "selected_probability": 0.023020990192890167,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 10,
+        "label": 0,
+        "selected_probability": 0.020133526995778084,
+        "random_probability_std": 0.0002979325072374195,
+        "mean_absolute_probability_change": 0.0002307775430381298,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 11,
+        "label": 0,
+        "selected_probability": 0.02214767225086689,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 13,
+        "label": 0,
+        "selected_probability": 0.0269119031727314,
+        "random_probability_std": 0.00030484655871987343,
+        "mean_absolute_probability_change": 0.0003737621009349823,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 15,
+        "label": 0,
+        "selected_probability": 0.018793774768710136,
+        "random_probability_std": 0.0004114042385481298,
+        "mean_absolute_probability_change": 0.00031336117535829544,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 18,
+        "label": 0,
+        "selected_probability": 0.16398867964744568,
+        "random_probability_std": 0.0028479532338678837,
+        "mean_absolute_probability_change": 0.003041766583919525,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 20,
+        "label": 0,
+        "selected_probability": 0.38504111766815186,
+        "random_probability_std": 0.06390755623579025,
+        "mean_absolute_probability_change": 0.1646483838558197,
+        "decision_flip_fraction": 0.875
+      },
+      {
+        "index": 24,
+        "label": 0,
+        "selected_probability": 0.030722370371222496,
+        "random_probability_std": 0.005665774457156658,
+        "mean_absolute_probability_change": 0.004717650357633829,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 27,
+        "label": 0,
+        "selected_probability": 0.026031363755464554,
+        "random_probability_std": 0.00338766654022038,
+        "mean_absolute_probability_change": 0.004371451213955879,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 7,
+        "label": 1,
+        "selected_probability": 0.882632315158844,
+        "random_probability_std": 0.02624678984284401,
+        "mean_absolute_probability_change": 0.020330674946308136,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 21,
+        "label": 1,
+        "selected_probability": 0.8262652158737183,
+        "random_probability_std": 0.020403340458869934,
+        "mean_absolute_probability_change": 0.039067983627319336,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 29,
+        "label": 1,
+        "selected_probability": 0.7397879958152771,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 30,
+        "label": 1,
+        "selected_probability": 0.6410836577415466,
+        "random_probability_std": 0.032351430505514145,
+        "mean_absolute_probability_change": 0.05591145157814026,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 31,
+        "label": 1,
+        "selected_probability": 0.912606418132782,
+        "random_probability_std": 0.0060739219188690186,
+        "mean_absolute_probability_change": 0.0060739219188690186,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 33,
+        "label": 1,
+        "selected_probability": 0.7913833260536194,
+        "random_probability_std": 0.04438888281583786,
+        "mean_absolute_probability_change": 0.07558481395244598,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 35,
+        "label": 1,
+        "selected_probability": 0.5634429454803467,
+        "random_probability_std": 0.0314885750412941,
+        "mean_absolute_probability_change": 0.11114351451396942,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 41,
+        "label": 1,
+        "selected_probability": 0.9007580876350403,
+        "random_probability_std": 0.003491954877972603,
+        "mean_absolute_probability_change": 0.019179895520210266,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 42,
+        "label": 1,
+        "selected_probability": 0.8459144830703735,
+        "random_probability_std": 0.007906606420874596,
+        "mean_absolute_probability_change": 0.01587074249982834,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 43,
+        "label": 1,
+        "selected_probability": 0.8192076086997986,
+        "random_probability_std": 0.011686684563755989,
+        "mean_absolute_probability_change": 0.09293042123317719,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 47,
+        "label": 1,
+        "selected_probability": 0.9610100984573364,
+        "random_probability_std": 0.0006987871020101011,
+        "mean_absolute_probability_change": 0.0009633004665374756,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 48,
+        "label": 1,
+        "selected_probability": 0.7346487641334534,
+        "random_probability_std": 0.019878104329109192,
+        "mean_absolute_probability_change": 0.1074802428483963,
+        "decision_flip_fraction": 0.0
+      }
+    ],
+    "mean_absolute_probability_change": 0.030670416192151606,
+    "mean_random_probability_std": 0.011967420858127298,
+    "mean_decision_flip_fraction": 0.036458333333333336,
+    "mean_score_gradient_abs": 0.003570459167046162,
+    "mean_context_delta_abs": null
+  },
+  "edge_context": {
+    "purpose": "Training-only balanced-case sensitivity diagnostic, not validation performance",
+    "cases": [
+      {
+        "index": 2,
+        "label": 0,
+        "selected_probability": 0.1849292665719986,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 6,
+        "label": 0,
+        "selected_probability": 0.02675914578139782,
+        "random_probability_std": 0.001960946246981621,
+        "mean_absolute_probability_change": 0.005135327577590942,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 8,
+        "label": 0,
+        "selected_probability": 0.03524501994252205,
+        "random_probability_std": 0.003093475243076682,
+        "mean_absolute_probability_change": 0.006766595412045717,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 9,
+        "label": 0,
+        "selected_probability": 0.023670852184295654,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 10,
+        "label": 0,
+        "selected_probability": 0.020737234503030777,
+        "random_probability_std": 0.00022210805036593229,
+        "mean_absolute_probability_change": 0.00017204415053129196,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 11,
+        "label": 0,
+        "selected_probability": 0.02249458059668541,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 13,
+        "label": 0,
+        "selected_probability": 0.02714374288916588,
+        "random_probability_std": 0.0005191850359551609,
+        "mean_absolute_probability_change": 0.0007540998049080372,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 15,
+        "label": 0,
+        "selected_probability": 0.019074970856308937,
+        "random_probability_std": 0.0002823027316480875,
+        "mean_absolute_probability_change": 0.0002487113233655691,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 18,
+        "label": 0,
+        "selected_probability": 0.16353699564933777,
+        "random_probability_std": 0.003116475185379386,
+        "mean_absolute_probability_change": 0.0029808133840560913,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 20,
+        "label": 0,
+        "selected_probability": 0.3569220304489136,
+        "random_probability_std": 0.06601771712303162,
+        "mean_absolute_probability_change": 0.17086797952651978,
+        "decision_flip_fraction": 0.875
+      },
+      {
+        "index": 24,
+        "label": 0,
+        "selected_probability": 0.030033886432647705,
+        "random_probability_std": 0.005117734428495169,
+        "mean_absolute_probability_change": 0.004182735923677683,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 27,
+        "label": 0,
+        "selected_probability": 0.026142632588744164,
+        "random_probability_std": 0.003174371784552932,
+        "mean_absolute_probability_change": 0.0038561748806387186,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 7,
+        "label": 1,
+        "selected_probability": 0.8724075555801392,
+        "random_probability_std": 0.028160054236650467,
+        "mean_absolute_probability_change": 0.02181268483400345,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 21,
+        "label": 1,
+        "selected_probability": 0.8151119351387024,
+        "random_probability_std": 0.021331245079636574,
+        "mean_absolute_probability_change": 0.04124011844396591,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 29,
+        "label": 1,
+        "selected_probability": 0.7269717454910278,
+        "random_probability_std": 0.0,
+        "mean_absolute_probability_change": 0.0,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 30,
+        "label": 1,
+        "selected_probability": 0.623635470867157,
+        "random_probability_std": 0.03289176523685455,
+        "mean_absolute_probability_change": 0.05713406950235367,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 31,
+        "label": 1,
+        "selected_probability": 0.9041972756385803,
+        "random_probability_std": 0.006597429513931274,
+        "mean_absolute_probability_change": 0.006597429513931274,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 33,
+        "label": 1,
+        "selected_probability": 0.7706073522567749,
+        "random_probability_std": 0.04840438440442085,
+        "mean_absolute_probability_change": 0.08226431906223297,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 35,
+        "label": 1,
+        "selected_probability": 0.5398107767105103,
+        "random_probability_std": 0.031970322132110596,
+        "mean_absolute_probability_change": 0.11281637102365494,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 41,
+        "label": 1,
+        "selected_probability": 0.89140784740448,
+        "random_probability_std": 0.0038651893846690655,
+        "mean_absolute_probability_change": 0.021305561065673828,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 42,
+        "label": 1,
+        "selected_probability": 0.836190938949585,
+        "random_probability_std": 0.008626870810985565,
+        "mean_absolute_probability_change": 0.012063845992088318,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 43,
+        "label": 1,
+        "selected_probability": 0.8065280318260193,
+        "random_probability_std": 0.012823397293686867,
+        "mean_absolute_probability_change": 0.09749218821525574,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 47,
+        "label": 1,
+        "selected_probability": 0.958482563495636,
+        "random_probability_std": 0.0007247375906445086,
+        "mean_absolute_probability_change": 0.0009605735540390015,
+        "decision_flip_fraction": 0.0
+      },
+      {
+        "index": 48,
+        "label": 1,
+        "selected_probability": 0.7100000977516174,
+        "random_probability_std": 0.021548671647906303,
+        "mean_absolute_probability_change": 0.11546029895544052,
+        "decision_flip_fraction": 0.0
+      }
+    ],
+    "mean_absolute_probability_change": 0.03183799758941556,
+    "mean_random_probability_std": 0.012518682631707634,
+    "mean_decision_flip_fraction": 0.036458333333333336,
+    "mean_score_gradient_abs": 0.003508745532599278,
+    "mean_context_delta_abs": 0.09968089933196704
+  }
+}

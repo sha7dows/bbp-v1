@@ -1,0 +1,32 @@
+{
+  "runs": [
+    {
+      "name": "screen_fold1_seed42",
+      "fold": 1,
+      "seed": 42,
+      "epochs": 8
+    },
+    {
+      "name": "confirm_fold2_seed42",
+      "fold": 2,
+      "seed": 42,
+      "epochs": 12
+    },
+    {
+      "name": "confirm_fold2_seed43",
+      "fold": 2,
+      "seed": 43,
+      "epochs": 12
+    }
+  ],
+  "modes": [
+    "none",
+    "random",
+    "semantic"
+  ],
+  "parent_retention": 0.7,
+  "final_test_evaluated": false,
+  "selection": "Fixed final epoch; last-three mean supplementary; no validation promotion",
+  "split_seed": 42,
+  "minimum_semantic_gain": 0.01
+}

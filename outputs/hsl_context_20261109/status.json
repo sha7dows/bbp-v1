@@ -1,0 +1,6 @@
+{
+  "phase": "complete",
+  "promoted": "node_detach",
+  "control": "node_control",
+  "final_test_evaluated": false
+}

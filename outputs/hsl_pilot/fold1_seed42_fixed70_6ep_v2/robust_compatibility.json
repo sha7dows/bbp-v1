@@ -1,0 +1,59 @@
+{
+  "purpose": "Functional compatibility only; not robust-budget performance evaluation",
+  "checks": [
+    {
+      "mode": "bbp",
+      "training_sessions": [
+        2,
+        6,
+        7,
+        8
+      ],
+      "loss": 0.2615649998188019,
+      "minimum_anchor_tail_coverage": 0.8987727165222168,
+      "kept": {
+        "0": 4,
+        "1": 5,
+        "2": 6,
+        "3": 6
+      },
+      "edits": 0
+    },
+    {
+      "mode": "feedback",
+      "training_sessions": [
+        2,
+        6,
+        7,
+        8
+      ],
+      "loss": 0.3373243510723114,
+      "minimum_anchor_tail_coverage": 0.8987727165222168,
+      "kept": {
+        "0": 4,
+        "1": 5,
+        "2": 6,
+        "3": 6
+      },
+      "edits": 0
+    },
+    {
+      "mode": "feedback_edit",
+      "training_sessions": [
+        2,
+        6,
+        7,
+        8
+      ],
+      "loss": 0.189888596534729,
+      "minimum_anchor_tail_coverage": 0.8987727165222168,
+      "kept": {
+        "0": 4,
+        "1": 5,
+        "2": 6,
+        "3": 6
+      },
+      "edits": 0
+    }
+  ]
+}

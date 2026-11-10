@@ -1,0 +1,6 @@
+{
+  "purpose": "One full standard training epoch: standalone fold worker versus sequential CV5 fold1",
+  "probability_max_difference": 1.7881393432617188e-07,
+  "same_prediction_order_and_labels": true,
+  "worker_finished": true
+}

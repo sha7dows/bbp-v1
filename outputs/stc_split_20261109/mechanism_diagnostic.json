@@ -1,0 +1,183 @@
+{
+  "purpose": "Training-only static structural diagnostics; all original candidate parents retained; no classifier outcome used",
+  "split_parent_count": 3136,
+  "parent_dispersion_mean": 0.3892986613550433,
+  "mean_child_dispersion_gain": {
+    "semantic": 0.02421387738041238,
+    "random": 0.0038144007873473565
+  },
+  "operator_change_sample": [
+    {
+      "index": 38,
+      "parents": 39,
+      "split_parents": 1,
+      "semantic_relative_operator_frobenius": 0.05243465727681243,
+      "random_relative_operator_frobenius": 0.05235030194298438
+    },
+    {
+      "index": 39,
+      "parents": 90,
+      "split_parents": 3,
+      "semantic_relative_operator_frobenius": 0.042061354632883956,
+      "random_relative_operator_frobenius": 0.03476860624489814
+    },
+    {
+      "index": 56,
+      "parents": 173,
+      "split_parents": 6,
+      "semantic_relative_operator_frobenius": 0.04371225397635341,
+      "random_relative_operator_frobenius": 0.03537544769343354
+    },
+    {
+      "index": 70,
+      "parents": 130,
+      "split_parents": 2,
+      "semantic_relative_operator_frobenius": 0.025182022532131716,
+      "random_relative_operator_frobenius": 0.024069241513984027
+    },
+    {
+      "index": 80,
+      "parents": 108,
+      "split_parents": 6,
+      "semantic_relative_operator_frobenius": 0.07975293550615808,
+      "random_relative_operator_frobenius": 0.05082076762571705
+    },
+    {
+      "index": 115,
+      "parents": 128,
+      "split_parents": 2,
+      "semantic_relative_operator_frobenius": 0.02795004052660552,
+      "random_relative_operator_frobenius": 0.026881899778596837
+    },
+    {
+      "index": 131,
+      "parents": 155,
+      "split_parents": 93,
+      "semantic_relative_operator_frobenius": 0.3536788320668996,
+      "random_relative_operator_frobenius": 0.16293282237913018
+    },
+    {
+      "index": 193,
+      "parents": 90,
+      "split_parents": 4,
+      "semantic_relative_operator_frobenius": 0.04805236616482459,
+      "random_relative_operator_frobenius": 0.03992854214172337
+    },
+    {
+      "index": 194,
+      "parents": 41,
+      "split_parents": 11,
+      "semantic_relative_operator_frobenius": 0.23152350062782504,
+      "random_relative_operator_frobenius": 0.1446714358818198
+    },
+    {
+      "index": 196,
+      "parents": 76,
+      "split_parents": 1,
+      "semantic_relative_operator_frobenius": 0.019783689692574248,
+      "random_relative_operator_frobenius": 0.01972467136698148
+    },
+    {
+      "index": 199,
+      "parents": 144,
+      "split_parents": 2,
+      "semantic_relative_operator_frobenius": 0.025911298913290224,
+      "random_relative_operator_frobenius": 0.02391650889160346
+    },
+    {
+      "index": 215,
+      "parents": 104,
+      "split_parents": 53,
+      "semantic_relative_operator_frobenius": 0.28712835288326916,
+      "random_relative_operator_frobenius": 0.1659900935354872
+    },
+    {
+      "index": 216,
+      "parents": 70,
+      "split_parents": 1,
+      "semantic_relative_operator_frobenius": 0.04521488285057938,
+      "random_relative_operator_frobenius": 0.04524236873252674
+    },
+    {
+      "index": 241,
+      "parents": 179,
+      "split_parents": 91,
+      "semantic_relative_operator_frobenius": 0.2871850508197062,
+      "random_relative_operator_frobenius": 0.14110142285418142
+    },
+    {
+      "index": 244,
+      "parents": 141,
+      "split_parents": 19,
+      "semantic_relative_operator_frobenius": 0.14085801334156567,
+      "random_relative_operator_frobenius": 0.09252071586581818
+    },
+    {
+      "index": 269,
+      "parents": 129,
+      "split_parents": 1,
+      "semantic_relative_operator_frobenius": 0.015167734435600546,
+      "random_relative_operator_frobenius": 0.015136166177275782
+    },
+    {
+      "index": 282,
+      "parents": 126,
+      "split_parents": 1,
+      "semantic_relative_operator_frobenius": 0.02417754384528224,
+      "random_relative_operator_frobenius": 0.024249717712962648
+    },
+    {
+      "index": 289,
+      "parents": 146,
+      "split_parents": 9,
+      "semantic_relative_operator_frobenius": 0.08157932140420579,
+      "random_relative_operator_frobenius": 0.05697183221474875
+    },
+    {
+      "index": 307,
+      "parents": 123,
+      "split_parents": 19,
+      "semantic_relative_operator_frobenius": 0.12251480546509869,
+      "random_relative_operator_frobenius": 0.08789511439696288
+    },
+    {
+      "index": 309,
+      "parents": 143,
+      "split_parents": 9,
+      "semantic_relative_operator_frobenius": 0.07319376102875408,
+      "random_relative_operator_frobenius": 0.06476459032724115
+    },
+    {
+      "index": 325,
+      "parents": 121,
+      "split_parents": 5,
+      "semantic_relative_operator_frobenius": 0.050040362583149076,
+      "random_relative_operator_frobenius": 0.03700448797496284
+    },
+    {
+      "index": 333,
+      "parents": 70,
+      "split_parents": 24,
+      "semantic_relative_operator_frobenius": 0.21630876578130523,
+      "random_relative_operator_frobenius": 0.1400155597280893
+    },
+    {
+      "index": 357,
+      "parents": 87,
+      "split_parents": 13,
+      "semantic_relative_operator_frobenius": 0.10494232555452532,
+      "random_relative_operator_frobenius": 0.07743421837887635
+    },
+    {
+      "index": 359,
+      "parents": 99,
+      "split_parents": 11,
+      "semantic_relative_operator_frobenius": 0.10141863988598583,
+      "random_relative_operator_frobenius": 0.07223149709812096
+    }
+  ],
+  "mean_relative_operator_change": {
+    "semantic": 0.1041571879914744,
+    "random": 0.06816658460242193
+  }
+}

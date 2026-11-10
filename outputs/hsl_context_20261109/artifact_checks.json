@@ -1,0 +1,53 @@
+{
+  "all_model_sources_match": {
+    "screen_fold1_seed42": {
+      "bbp_behm/__init__.py": true,
+      "bbp_behm/backbone.py": true,
+      "bbp_behm/config.py": true,
+      "bbp_behm/data.py": true,
+      "bbp_behm/explain.py": true,
+      "bbp_behm/hsl.py": true,
+      "bbp_behm/hsl_context.py": true,
+      "bbp_behm/hypergraph.py": true,
+      "bbp_behm/model.py": true,
+      "bbp_behm/selector.py": true,
+      "bbp_behm/thresholding.py": true,
+      "bbp_behm/training.py": true
+    },
+    "confirm_fold2_seed42": {
+      "bbp_behm/__init__.py": true,
+      "bbp_behm/backbone.py": true,
+      "bbp_behm/config.py": true,
+      "bbp_behm/data.py": true,
+      "bbp_behm/explain.py": true,
+      "bbp_behm/hsl.py": true,
+      "bbp_behm/hsl_context.py": true,
+      "bbp_behm/hypergraph.py": true,
+      "bbp_behm/model.py": true,
+      "bbp_behm/selector.py": true,
+      "bbp_behm/thresholding.py": true,
+      "bbp_behm/training.py": true
+    },
+    "confirm_fold2_seed43": {
+      "bbp_behm/__init__.py": true,
+      "bbp_behm/backbone.py": true,
+      "bbp_behm/config.py": true,
+      "bbp_behm/data.py": true,
+      "bbp_behm/explain.py": true,
+      "bbp_behm/hsl.py": true,
+      "bbp_behm/hsl_context.py": true,
+      "bbp_behm/hypergraph.py": true,
+      "bbp_behm/model.py": true,
+      "bbp_behm/selector.py": true,
+      "bbp_behm/thresholding.py": true,
+      "bbp_behm/training.py": true
+    }
+  },
+  "last_checkpoints_present": true,
+  "status": {
+    "phase": "complete",
+    "promoted": "node_detach",
+    "control": "node_control",
+    "final_test_evaluated": false
+  }
+}

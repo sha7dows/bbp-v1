@@ -1,0 +1,674 @@
+# 用途：从用户提供的BeHM原始PDF提取的辅助核对文本；正式引用以原PDF为准。
+
+=== PDF PAGE 1 ===
+Behavior-driven Hypergraph Modeling for Accurate
+Cyberbullying Detection in Social Media
+Xiaoyu Sean Lu 1, Zihao Ding 1, Xugong Qin 1, Di Wu 1,*, Jia Duan 1
+1Nanjing University of Science and Technology
+Abstract—With the widespread adoption of social media and
+the growing complexity of online interactions, cyberbullying
+has increasingly exhibited characteristics such as group involve-
+ment, concealment, and coordinated behaviors. Most existing
+approaches model interactions by using linear sequences or
+binary graphs, which primarily capture simple local relationships
+but struggle to mimic multi-user coordinated attacks effectively.
+Moreover, these methods fail to model the relationship among
+group behaviors that naturally emerge during the evolution
+of cyberbullying. To address these challenges, we propose a
+Behavior-driven Hypergraph Model for Cyberbullying Detection
+(BeHM), which parses cyberbullying behaviors within media
+sessions at two complementary levels: coordinated interactions
+at the micro-level, and their relations at the macro-level. Then,
+BeHM adopts a three-stage framework to capture the features at
+the micro and macro levels. Experiments on two public session-
+based social media datasets demonstrate that BeHM consistently
+outperforms baselines, achieving an F1-score with improvements
+of up to 1.3% on Instagram and 2.8% on Vine, and validating its
+effectiveness in modeling complex group attacks and relationships
+among group behaviors.
+Index Terms—cyberbullying detection, social media analysis,
+hypergraphs
+I. INTRODUCTION
+Defined as repeated aggressive behaviors carried out
+through digital devices against vulnerable targets, cyberbul-
+lying has become a global issue with the rapid growth of
+social media [1]. Approximately half of young people have
+experienced some forms of cyberbullying, and 10-20% faced
+it regularly [2]. Victims often suffer from depression, anxiety,
+and decreased self-esteem; in severe cases, they may even ex-
+hibit self-harm or suicidal tendencies [3]. Therefore, effective
+cyberbullying detection is critically important.
+Recent studies have leveraged Graph Neural Networks
+(GNNs) [4] to model media sessions through reply-to or user
+interaction graphs [5], [6]. However, these pairwise graph-
+based methods primarily capture individual user behaviors
+(e.g., user A attacks user B), but struggle to model the coor-
+dinated group behavior [7], [8], which manifests as collective
+encirclement cyberbullying behaviors formed through interac-
+tions among multiple users, as shown in Fig. 1. Moreover,
+existing methods treat a group behavior as an isolated behavior
+[9], [10], which neglects the relationship among different
+group behaviors. E.g., a few groups attack the same victim,
+which causes these groups to support each other stronger
+This work is supported by National Natural Science Foundation of China
+under Grants NO.62302223.
+* Corresponding author. E-mail: diwu hrb@njust.edu.cn
+User: U1
+Time: 04-06 09:17
+Content: Hey I’m sus as fuck whats good
+Post
+U2 04-06 12:40: Your hairline is so dicked
+U3 04-06 12:52: Ugly ass dickhead
+U4 04-06 13:35: He's not that ugly assholes.
+U5 04-06 15:02: @user4 fuck you bro you 
+just a hater homie
+U6 04-06 15:03: @user5 I ain't no hater my 
+nigga earl just ugly AS
+Sequence of its comments
+𝑈1
+𝑈5
+𝑈3
+𝑈2
+𝑈4
+𝑈6
+Group collaborative 
+behavior among users
+Attack
+Attack Group
+Defend
+Fig. 1 Illustration of collective encirclement cyberbullying
+behaviors. The left shows an example of a cyberbullied
+media session with a post and sequential comments, while
+the right presents the corresponding interaction pattern, which
+illustrates coordinated attacks from multiple users (U2,U 3,U 5,
+andU 6) against the post authorU 1 and userU 4.
+and stronger, and creates a sustained harassment environment
+for the victims. These limitations in modeling coordinated
+group behaviors and their relationship severely restrict the
+identification of covert and persistent cyberbullying.
+As an extension of traditional graphs, hypergraphs leverage
+their unique hyperedges to connect multiple nodes simultane-
+ously and thus offer a more natural modeling framework for
+describing coordinated behaviors [11]. These structures have
+been widely applied in areas such as fake news detection
+and hate speech detection. However, most existing studies
+[12], [13] primarily model macroscopic relationships among
+sessions rather than providing an in-depth analysis of the
+complex interactions within each session.
+To address these challenges, we propose a Behavior-driven
+Hypergraph Model for Cyberbullying Detection (BeHM),
+which captures cyberbullying through two complementary
+levels. At the micro-level, we model and connect related
+multi-user coordinated interactions with a hyperedge that
+represents an individual group behavior, and at the macro-
+level, an Interaction Behavior Graph (IBG) captures different
+relations among group behaviors, and then, related relations
+are formed as communities through a community discovery
+method. Through a top-down fusion strategy, BeHM integrates
+the features at these two complementary levels and develops
+an effective identification of concealed and persistent cyberbul-
+lying behaviors. Overall, the main contributions of this study
+
+=== PDF PAGE 2 ===
+are summarized as follows:
+•We highlight the importance of modeling coordinated
+group behaviors for cyberbullying detection and present
+a hypergraph to explicitly capture collective interactions
+within sessions through multiple types of hyperedges.
+•We propose a behavior-driven hypergraph framework
+that treats hyperedges as coordinated group behaviors
+and further converts them into an Interaction Behavior
+Graph, for better capturing the relationships among group
+behaviors at a macro level.
+•We design a multi-dimensional fusion mechanism that
+aligns the features at these two complementary levels,
+improving robustness and interpretability for session-level
+cyberbullying detection.
+The proposed BeHM model is evaluated on two public
+datasets, Instagram [14] and Vine [15]. The comparative
+results demonstrate that the BeHM model outperforms the
+existing state-of-the-art models and comprehensively verifies
+its effectiveness in complex cyberbullying detection scenarios.
+II. RELATEDWORK
+A. Cyberbullying Detection
+Over the past decade, the field of cyberbullying detection
+has evolved from sequence modeling to graph modeling. Early
+work models sessions as sequential data by using hierarchical
+attention networks [16]. Cheng et al. [9] extend this with bidi-
+rectional GRUs and hierarchical attentions to capture word-
+level and comment-level contexts. Recent studies shift the
+focus to user interactions by using Graph Neural Networks
+(GNNs) [4]. Chen and Li [5] employ Graph Convolutional
+Networks (GCNs) to capture inter-session and inter-post con-
+nections, while Ge et al. [6] model the evolving interactions by
+using a time graph. Building on this, Zhou et al. [17] introduce
+TUHIN to model multidimensional social relationships via
+heterogeneous graphs and temporal attention. However, tradi-
+tional graphs are limited by binary connectivity and struggle to
+capture group-based cyberbullying with multiple participants
+(attackers, victims, bystanders). When GNNs model collective
+attacks involving three or more users, their message-passing
+mechanism suffers from information dilution. It creates low-
+order representation bottlenecks, which weakens their ability
+to handle complex group interactions.
+B. Hypergraph Learning
+Hypergraphs attract widespread attention due to their natural
+ability to model complex high-order relationships. Hypergraph
+Neural Networks (HGNNs) [18] explicitly capture high-order
+relationships by constructing hyperedges among semantically
+similar nodes based on distance metrics. The attention mecha-
+nism for hypergraph introduced on this basis further enhances
+the model’s power for expression. HyperGAT [19] employs a
+two-level attention mechanism to capture high-order semantic
+dependencies between words and sentences in text classifica-
+tion tasks. Hypergraph neural networks are widely applied in
+social media analysis. Jeong et al. [12] propose a framework
+that constructs three types of hyperedges (user, time, and en-
+tity) to capture group collaboration relationships during rumor
+dissemination. Su and Yang [13] construct hypergraphs for
+user attributes to represent non-textual high-order relationships
+in the user participation for the news dissemination. Xu et
+al. [20] propose a temporal hypergraph neural network for
+information diffusion modeling, which captures both local
+interactions and global diffusion patterns by jointly modeling
+high-order interactions and their temporal dynamics. These
+studies demonstrate the significant potential of hypergraphs
+in capturing diverse interactions.
+III. PROBLEMSTATEMENT
+LetO={S 1, S2, . . . , SN }denote a dataset consisting of
+Nsocial media sessions for analysis, whereS i corresponds
+to thei-th session. Each sessionS i is characterized by a
+quadrupleS i ={P i, Ci, Ui, Yi}, which includes the initial
+postP i, a collection of commentsC i ={C 1 i , C2 i , . . . , Cn i },
+the corresponding usersU i ={U P i , UC1 i , UC2 i , . . . , UCn i }of
+the post and comments, and its associated ground truthY i.
+Our objective is to model a sessionS i using a behavior-
+driven hypergraph framework that captures coordinated group
+behaviors at the micro level and the relationship among these
+group behaviors at the macro level. By learning multi-level
+representations that encode high-order interactions and their
+structural associations, we aim to classify each session as
+either bullying (Y i = 1) or non-bullying (Yi = 0).
+IV. METHODOLOGY
+The overall framework of BeHM is illustrated in Fig. 2. It
+consists of three core modules: 1) Hypergraph Construction,
+which constructs a hypergraph for each session; 2) High-Order
+Interaction Modeling, which treats hyperedges as coordinated
+group behaviors and captures relationships among behaviors
+from a macroscopic perspective; 3) Multi-dimensional Infor-
+mation Fusion, which integrates information across multiple
+levels to determine whether a session involves cyberbullying.
+The following provides a detailed elaboration on BeHM.
+A. Hypergraph Construction
+Initial Feature Extraction.We concatenate the original post
+Pand its commentsCin a social media sessionSinto an
+ordered node sequenceN={n 1, . . . , nk}as input to BeHM.
+A pre-trained language modelM(e.g., BERT) is employed
+to encode each node:
+Xi =M(n i),∀n i ∈N(1)
+whereX i ∈R d denotes thed-dimensional representation
+of noden i. These features are then fed into the hypergraph
+modeling stage.
+Hypergraph Structure Modeling.Cyberbullying in social
+networks is often collaboratively conducted by multiple users,
+involving behaviors such as collective agreement, siege, or
+defense [1]. Traditional graphs with binary edges struggle to
+capture the collective intent and multi-user interactions. We
+model each sessionS i as a hypergraphH={N, E H }, where
+Nis the set of nodes andE H is the set of hyperedges. To
+
+=== PDF PAGE 3 ===
+Multi-dimensional Information Fusion
+(c) Aggregation Module
+High-Order Interaction ModelingHypergraph Construction
+𝑉𝑝
+𝑉4
+𝑉1
+𝑉3
+𝑉2
+𝑉5
+𝑒1
+𝑒2
+𝑒3
+Social media session
+𝑃𝑜𝑠𝑡
+𝑐𝑜𝑚𝑚𝑒𝑛𝑡1
+𝑐𝑜𝑚𝑚𝑒𝑛𝑡2
+𝑐𝑜𝑚𝑚𝑒𝑛𝑡𝑖
+…
+𝑇1
+𝑇2
+𝑇𝑖
+PLM Encoder Hypergraph Construction
+HGNNHConv 1
+HConv 2
+𝑿𝑵…
+Hyperedge
+Association 
+Network
+Aggregation 
+Module
+Classifier
+ො𝑦
+(b) Hyperedge Association Network
+𝑿𝑵
+𝑿𝑬
+𝑪𝒄𝒐𝒎𝒎
+Q
+Attention
+Pooling
+Attention
+Pooling
+K/V
+𝑪𝑮
+𝑿𝑬…
+𝑪𝒄𝒐𝒎𝒎
+…
+𝑪𝒇𝒊𝒏𝒂𝒍
+(a) Framework
+GAT 
+Propagation
+𝑒1 𝑒2
+𝑒3
+𝑒4
+𝑒5
+𝑒6
+Community Discovery
+𝑒1 𝑒2
+𝑒3
+𝑒4
+𝑒5
+𝑒6
+Community 1
+Community 2
+𝑿𝑬…
+𝑪𝒄𝒐𝒎𝒎
+…
+concatenate
+𝑿𝑳 𝑪𝒇𝒊𝒏𝒂𝒍
+Interaction Behavior 
+Graph
+Fig. 2 The framework of BeHM. (a) Overview of the proposed Behavior-driven Hypergraph Model for Cyberbullying Detection.
+A social media session is modeled as a hypergraph with coordinated group behaviors as hyperedges. Node featuresX N ,
+and hyperedge featuresX E are learned via hypergraph modeling, while collaborative interaction patterns among group
+behaviors are captured through interaction graph modeling and are finally fused for session-level classification. (b) Hyperedge
+Association Network models relationships among group behaviors by constructing an Interaction Behavior Graph and extracting
+global collaborative patterns via attention and community discovery. (c) Aggregation Module integrates node, hyperedge, and
+community-level features through multi-dimensional attention to obtain the final session representation.
+capture diverse interaction patterns, we define three types of
+hyperedges, each corresponding to a group behavior.
+a) Semantic-Temporal Coordinated Behavior:Existing
+temporal-based methods often introduce irrelevant nodes,
+while semantic-based methods fail to capture temporally
+continuous collective attacks with weak semantic correla-
+tions [21]. To address this limitation, we jointly model se-
+mantic similarity and temporal contiguity to construct hyper-
+edges that capture implicit coordinated attack behaviors [6].
+Specifically, we use the cosine similaritys ij between nodes
+ni andn j to quantify their semantic relevance and define the
+connection strength between nodes as a modified form ofs ij:
+Fij =s ij ·
+
+1 +β·G(s ij)·exp
+
+− Tij
+τ
+
+,(2)
+whered ij denotes the time interval between nodesn i andn j,
+βcontrols the influence of temporal information, andτdeter-
+mines temporal sensitivity. To preserve semantic dominance,
+a binary gateG(s ij)activates temporal correction only when
+sij > η. We compare the linking strengthF ij between node
+ni and noden j. IfF ij is greater than the hyperedge threshold
+θ, the node pair is added to the hyperedgeE ST C,i.
+b) User Coherence Behavior:Cyberbullying sessions
+often involve users exhibiting consistent attacking or defend-
+ing behaviors across multiple contents [22]. To capture this
+behavioral continuity, we construct user coherence hyperedges
+by aggregating all nodes authored by the same user:
+EU ser,u={n i ∈N|U(n i) =u},(3)
+whereurepresents a specific user, andU(n i)represents the
+user corresponding to noden i.
+c) Mention Interaction Behavior:@-mentions indicate
+strong and targeted interactions in social media sessions [23],
+often reflecting focused group behaviors centered around spe-
+cific individuals. For each mentioned useru, we define a
+mention interaction hyperedge that consists of all nodes that
+mentionuand all nodes authored byu.
+EM ent,u={nj ∈N|u∈Ment(n j)}
+∪ {nk ∈N|U(n k) =u}, (4)
+whereuis a user mentioned in the session, Ment(n j)denotes
+the set of users mentioned in content noden j.
+B. High-Order Interaction Modeling
+After constructing the hypergraph, we apply a Hypergraph
+Neural Network (HGNN) [18] to propagate information be-
+tween content nodes and hyperedges. Through this process,
+we obtain the node featuresX N and hyperedge featuresX E.
+Hyperedge Association Network Construction.Traditional
+hypergraph modeling typically treats hyperedges merely as
+intermediate structures for message passing among nodes,
+rather than as independent semantic entities. As a result, such
+approaches fail to explicitly model the interactions and de-
+pendencies among different behaviors [24]. In cyberbullying,
+coordinated group behaviors are often closely related and mu-
+tually reinforcing within a session. To explicitly model these
+behaviors relationship, we propose the Interaction Behavior
+Graph (IBG) denoted asG IB ={E H , EG}, which reinterprets
+each hyperedgeE i ∈E H as a group behavior node. The edges
+eij ∈E G model the interaction strength between different
+behaviors, enabling the model to explicitly reason about how
+group behaviors relate to each other within a session.
+
+=== PDF PAGE 4 ===
+Given the collective nature of cyberbullying, interaction
+behaviors that share participants tend to exhibit strong asso-
+ciations [5]. Accordingly, we quantify the interaction strength
+between two hyperedgesE i andE j using Jaccard similarity,
+which serves as the association weightW ij:
+Wij = |Vi ∩V j| |Vi ∪V j| ,(5)
+whereV i andV j denote the sets of content nodes participating
+in hyperedgesE i andE j, respectively.
+Collaborative Pattern Feature.We use the hyperedge repre-
+sentationsX E learned by the HGNN as initial node features
+of the IBG and apply a Graph Attention Network (GAT)
+to propagate information among behavior nodes to obtain
+updated representations. To identify groups of closely related
+interaction behaviors in the IBG, we apply the Louvain com-
+munity detection algorithm [25], which partitions the graph
+into interaction behavior communities with dense connectivity
+and high participant overlap. We then perform mean pooling
+within each community to obtain community-level represen-
+tationsC comm. These representations capture community-level
+collaborative patterns.
+C. Multi-dimensional Information Fusion
+In this module, we employ a multi-dimensional attention
+fusion mechanism to integrate information across nodes, hy-
+peredges, and communities. Specifically, we first obtain the
+global collaborative patternC G through attention pooling over
+the community-level featuresC comm. We then concatenate
+node and hyperedge features to formX L ={X N ;X E}.
+Conditioned onC G, an attention mechanism highlights local
+content nodes and group behaviors that are most consistent
+with the global collaborative pattern. Finally, the attended local
+features are fused withC G through a residual connection to
+produce the final session representationC final as follows:
+CL = softmax
+ CGX ⊤ L√dk  XL,(6)
+Cfinal =C G +Linear(C L),(7)
+whered k is the scaling factor,softmax(·)normalizes the
+attention scores into a probability distribution over the local
+sequence, and Linear(·)is a learnable projection layer.
+Session Classification.Since the imbalanced class often leads
+to systematic bias in the learned decision boundary and favors
+majority classes in the classifier’s logits, we adopt the logit
+technique proposed by Menon et al. [26] to compensate for
+the skewed training data distribution. Specifically, the adjusted
+logits are computed as:
+Logitsi =f(C final)−δ·logπ,(8)
+wheref(·)is the classification function,πrepresents the class
+frequency, andδis a learnable scaling parameter that enables
+dynamic adjustment for each class.
+In the task of cyberbullying detection, session-level annota-
+tions often involve subjective judgment, and manually assigned
+labels may contain noise. To enhance the robustness of the
+model, we leverage the confidence scores that refer to the
+consistency of annotators to construct a confidence-weighted
+cross-entropy loss. The loss is defined as follows:
+L(θ) = 1 B
+BX
+i=1
+Confidencei · LCE(Logitsi, Yi),(9)
+whereBis the total number of sessions,L CE is the standard
+cross-entropy loss, Confidence i denotes the consistency of
+annotators for sessionS i,Y i ∈ {0,1}represents the ground-
+truth label of the media session, andθrepresents all parameters
+in the network.
+V. EXPERIMENTS
+A. Dataset
+We conduct experiments on two public datasets, Instagram
+[14] and Vine [15]. These datasets are widely recognized and
+used in media-session-based cyberbullying studies.
+B. Experimental Setup
+1) Evaluation Metrics:We use five standard evaluation
+metrics for comparisons among cyberbullying detection mod-
+els [5], [6], [9]: Accuracy, F1, Precision, Recall, and AUC.
+2) Baseline Methods:To comprehensively evaluate the
+effectiveness of our approach, we compare it against represen-
+tative baselines that model cyberbullying detection from three
+mainstream modeling paradigms: (1) sequence-based session
+modeling methods: HANCD [9] and LS-CB [27], (2) graph-
+based session modeling methods: GNN [4], HENIN [5] and
+TGBully [6], (3) hypergraph-based session modeling methods:
+HGNN [18], HGFND [12] and HA-GCEN [23].
+3) Parameter Settings:The semantic-temporal coordinated
+behavior hyperedge construction thresholdsθare set to0.65
+and0.6for the Instagram and Vine datasets, respectively.
+During the hypergraph construction process, we set semantic
+sensitivityτto0.1, semantic compensationηto0.55, and
+temporal weightβto0.5. We train the model for 40 epochs
+with a learning rate of10 −4 and dropout of0.2. We split the
+dataset into 80% for training and 20% for testing. We report
+results averaged over five runs.
+C. Experimental Results
+As shown in Table I, the proposed BeHM consistently
+achieves the best performance on both datasets. Based on these
+results, we make the following key observations:
+1) In contrast to sequence-based methods, which rely on
+attention mechanisms and sliding windows to model temporal
+dependencies, BeHM achieves a better balance between pre-
+cision and recall. While sequence-based models struggle to
+capture complex user relationships, BeHM explicitly models
+relational structures among users and their interactions via
+hypergraphs.
+2) In contrast to graph-based approaches, which model
+interactions using binary relations, BeHM exhibits superior
+overall detection performance. Graph-based methods are lim-
+ited to modeling pairwise user relationships, which restricts
+
+=== PDF PAGE 5 ===
+TABLE I Performance comparison among different models on the Instagram and Vine datasets.
+Methods Instagram Vine Acc. Prec. Rec. F1 AUC Acc. Prec. Rec. F1 AUC
+HANCD [9] 0.740 0.583 0.647 0.598 0.715 0.733 0.643 0.482 0.499 0.664
+LS-CB [27] 0.846 0.7220.8200.768 0.908 0.778 0.629 0.721 0.672 0.827
+GNN [4] 0.849 0.801 0.697 0.734 0.896 0.790 0.679 0.623 0.646 0.817
+TGBully [5] 0.847 0.731 0.707 0.719 0.811 0.743 0.651 0.513 0.613 0.684
+HENIN [6] 0.841 0.774 0.732 0.738 0.818 0.783 0.679 0.607 0.637 0.735
+HGNN [18] 0.864 0.805 0.749 0.773 0.906 0.802 0.7100.627 0.664 0.828
+HGFND [12] 0.864 0.812 0.734 0.769 0.905 0.797 0.687 0.672 0.674 0.844
+HA-GCEN [23] 0.866 0.789 0.778 0.783 0.915 0.798 0.666 0.712 0.688 0.838
+BeHM (Ours) 0.876 0.8140.784 0.7960.907 0.8160.702 0.738 0.716 0.845
+their ability to represent coordinated group behaviors involving
+multiple participants, leading to inferior F1-scores.
+3) In contrast to existing hypergraph-based methods, BeHM
+further advances high-order relational modeling by treating
+hyperedges as semantically meaningful group behaviors rather
+than auxiliary aggregation structures. While prior methods
+overlook interactions among hyperedges within a session,
+BeHM explicitly models relationships among group behaviors
+at the macro level to capture their collaborative patterns within
+a session.
+As a result, BeHM achieves F1-scores of 0.796 on Instagram
+and 0.716 on Vine, surpassing the strongest baseline by 1.3%
+and 2.8%, respectively, while maintaining consistently high
+recall across datasets.
+D. Ablation Study
+To evaluate the contribution of each key component, we con-
+duct an ablation study with five model variants. BeHM-STC,
+BeHM-User, and BeHM-Ment, respectively, remove seman-
+tic–temporal coordinated behavior, user coherence behavior,
+and mention interaction behavior hyperedges in the hypergraph
+construction. BeHM-IBG removes the Interaction Behavior
+Graph, and BeHM-MDF removes the multi-dimensional fu-
+sion. Table II reports the distribution of different hyperedge
+types across datasets. We observe that mention interaction
+behavior hyperedges account for only a very small proportion
+in the Vine dataset. Consequently, BeHM-Ment is excluded
+from the ablation study on Vine.
+TABLE II Hyperedge Distribution in Instagram and Vine.
+Dataset STC User Ment
+Instagram 137153 (85.57%) 12922 (8.06%) 10216 (6.37%)
+Vine 63389 (91.71%) 5704 (8.25%) 23 (0.03%)
+The results are shown in Fig. 3. The ablation study of BeHM
+provides the following insights:
+1) All components contribute to the model performance.
+Removing any component degrades the results, confirming that
+each module is essential.
+2) Among the three hyperedge types, removing semantic-
+temporal coordinated behavior hyperedges (-STC) causes the
+largest performance drop, indicating that cyberbullying primar-
+ily manifests through implicit collective attacks.
+3) Removing the Interaction Behavior Graph (-IBG) de-
+creases performance on both datasets, confirming that coordi-
+nated group behaviors are interdependent rather than isolated
+within sessions.
+4) Removing the multi-dimensional fusion mechanism (-
+MDF) also reduces performance, with a more pronounced
+effect on Vine. This is likely due to the fragmented nature
+of text on Vine. The local features contain substantial noise,
+and without alignment to the global session representation, the
+model struggles to identify true cyberbullying patterns from
+complex behaviors.
+(a) Instagram
+(b) Vine
+Fig. 3 Results of ablation studies for different BeHM variants.
+E. Case Study
+In this section, a case study is used to verify the inter-
+pretability and effectiveness of the BeHM model for iden-
+tifying multi-level cyberbullying patterns. Fig. 4 presents a
+representative cyberbullying session and the top-5 comments
+highlighted by BeHM based on fused attention scores. BeHM
+assigns high weights to a sequence of temporally concentrated
+and highly aggressive replies, mostly authored by the same
+user (User3) and directly targeting another participant (User8).
+This indicates that BeHM not only captures individual offen-
+sive language but also recognizes temporally concentrated and
+
+=== PDF PAGE 6 ===
+user-consistent behaviors as a coordinated attack pattern. In
+addition, the highlighted comments revolve around the first
+comment, suggesting that BeHM effectively identifies the core
+content driving the escalation of cyberbullying in the session.
+UserTime Top-5 Comments Ranked by BeHM
+User310-18 19:00 STOP WITH THE OOOH KILL EM 
+User310-18 19:13 @user8 how about you shut the fuck up and mind your business bitch? Who are you? Ciph'sbodyguard. Loser
+User310-18 19:14 @user8 and itsactually an annoying ass phrase, not a word you dumb fuck
+User810-18 19:20 @user3 Buuhuu.. Please go cry somewhere else, cuntface!
+User310-18 19:22 @user8 you're the one looking for attention. Now go eat a cookie and make a twerk video you useless twat
+Original Posted text                                                                Label
+Ooohhhkill em.... My girl Laura making me feel like a star.（#Cyberbullying = True）
+Fig. 4 Top-5 comments highlighted by BeHM.
+VI. CONCLUSION
+In this paper, we investigate the collective behavioral pat-
+terns underlying cyberbullying and the limitations of existing
+sequential and pairwise graph methods in modeling high-
+order interactions. To address these limitations, we propose
+BeHM, a behavior-driven hypergraph framework. BeHM cap-
+tures coordinated attack behaviors at the micro level and
+their relationship at the macro level through hyperedge con-
+struction, interaction behavior graph modeling, and multi-
+dimensional information fusion. Experimental results on two
+public datasets show that BeHM consistently outperforms ex-
+isting methods. These results demonstrate the effectiveness of
+high-order relational modeling and layered multi-dimensional
+fusion for session-level cyberbullying detection. Future work
+can extend this framework to finer-grained behavior analysis,
+cross-session relation modeling, and multimodal integration.
+REFERENCES
+[1] P. Yi and A. Zubiaga, “Session-based cyberbullying detection in social
+media: A survey,”Online Social Networks and Media, vol. 36, p.
+100250, 2023.
+[2] N. Baldikov, “Latest cyberbullying statistics–the extent of cyberbullying
+in 2024,”Dipetik September, vol. 23, p. 2024, 2023.
+[3] M. Carvalho, C. Branquinho, and M. G. de Matos, “Cyberbullying and
+bullying: Impact on psychological symptoms and well-being,”Child
+Indicators Research, vol. 14, no. 1, pp. 435–452, 2021.
+[4] F. Scarselli, M. Gori, A. C. Tsoi, M. Hagenbuchner, and G. Monfardini,
+“The graph neural network model,”IEEE Transactions on Neural
+Networks, vol. 20, no. 1, pp. 61–80, 2008.
+[5] H.-Y . Chen and C.-T. Li, “Henin: Learning heterogeneous neural interac-
+tion networks for explainable cyberbullying detection on social media,”
+inProceedings of the 2020 Conference on Empirical Methods in Natural
+Language Processing (EMNLP), 2020, pp. 2543–2552.
+[6] S. Ge, L. Cheng, and H. Liu, “Improving cyberbullying detection with
+user interaction,” inProceedings of the Web Conference 2021, 2021, pp.
+496–506.
+[7] M. H. Saeed, K. Papadamou, J. Blackburn, E. De Cristofaro, and
+G. Stringhini, “Tuberaider: Attributing coordinated hate attacks on
+youtube videos to their source communities,” inProceedings of the
+International AAAI Conference on Web and Social Media, vol. 18, 2024,
+pp. 1354–1366.
+[8] G. Kundu, S. Ghosh, and S. Choudhury, “Rumor containment in
+hypergraph representation of social networks: A deep reinforcement
+learning-based solution,”IEEE Transactions on Computational Social
+Systems, 2024.
+[9] L. Cheng, R. Guo, Y . Silva, D. Hall, and H. Liu, “Hierarchical attention
+networks for cyberbullying detection on the instagram social network,”
+inProceedings of the 2019 SIAM International Conference on Data
+Mining. SIAM, 2019, pp. 235–243.
+[10] V . J. Prakash and S. A. A. Vijay, “Multi-tier linguistic and emotional
+modeling for cyberbullying detection in tamil social media,”Expert
+Systems with Applications, p. 129270, 2025.
+[11] C. Xu, R. Zheng, Z. Feng, and C. Zhang, “Multi-scale hypergraph
+relational reasoning for weakly supervised recognition of group activi-
+ties,” in2025 IEEE International Conference on Multimedia and Expo
+(ICME), 2025, pp. 1–6.
+[12] U. Jeong, K. Ding, L. Cheng, R. Guo, K. Shu, and H. Liu, “Nothing
+stands alone: Relational fake news detection with hypergraph neural
+networks,” in2022 IEEE International Conference on Big Data (Big
+Data). IEEE, 2022, pp. 596–605.
+[13] X. Su, J. Yang, J. Wu, and Z. Qiu, “Hy-defake: Hypergraph neural
+networks for detecting fake news in online social networks,”Neural
+Networks, vol. 187, p. 107302, 2025.
+[14] H. Hosseinmardi, S. A. Mattson, R. Ibn Rafiq, R. Han, Q. Lv, and
+S. Mishra, “Analyzing labeled cyberbullying incidents on the instagram
+social network,” inInternational Conference on Social Informatics.
+Springer, 2015, pp. 49–66.
+[15] R. I. Rafiq, H. Hosseinmardi, R. Han, Q. Lv, S. Mishra, and S. A. Matt-
+son, “Careful what you share in six seconds: Detecting cyberbullying
+instances in vine,” inProceedings of the 2015 IEEE/ACM International
+Conference on Advances in Social Networks Analysis and Mining 2015,
+2015, pp. 617–622.
+[16] Z. Yang, D. Yang, C. Dyer, X. He, A. Smola, and E. Hovy, “Hierarchical
+attention networks for document classification,” inProceedings of the
+2016 Conference of the North American Chapter of the Association for
+Computational Linguistics: Human Language Technologies, 2016, pp.
+1480–1489.
+[17] G. Zhou, X. S. Lu, R. Zhang, H. Liu, and B. Huang, “Time-user
+heterogeneous neural interaction network for cyberbullying detection,”
+in2024 International Joint Conference on Neural Networks (IJCNN).
+IEEE, 2024, pp. 1–8.
+[18] Y . Feng, H. You, Z. Zhang, R. Ji, and Y . Gao, “Hypergraph neural net-
+works,” inProceedings of the AAAI Conference on Artificial Intelligence,
+vol. 33, no. 01, 2019, pp. 3558–3565.
+[19] K. Ding, J. Wang, J. Li, D. Li, and H. Liu, “Be more with less:
+Hypergraph attention networks for inductive text classification,” in
+Proceedings of the 2020 Conference on Empirical Methods in Natural
+Language Processing (EMNLP), 2020, pp. 4927–4936.
+[20] H. Xu, C. Gao, X. Li, and Z. Wang, “Hyperidp: Customizing tempo-
+ral hypergraph neural networks for multi-scale information diffusion
+prediction,” inProceedings of the 31st International Conference on
+Computational Linguistics, 2025, pp. 964–977.
+[21] D. Xu, C. Ruan, E. Korpeoglu, S. Kumar, and K. Achan, “Inductive
+representation learning on temporal graphs,” inProceedings of the
+International Conference on Learning Representations (ICLR), 2020.
+[22] J. Wang, T. Zhang, L. Zhang, Y . Bai, X. Li, and J. Jin, “Hyperman:
+Hypergraph-enhanced meta-learning adaptive network for next poi rec-
+ommendation,” in2025 IEEE International Conference on Multimedia
+and Expo (ICME), 2025, pp. 1–6.
+[23] Y . Mu, J. Yang, T. Li, S. Li, and W. Liang, “Ha-gcen: Hyperedge-
+abundant graph convolutional enhanced network for hate speech detec-
+tion,”Knowledge-Based Systems, vol. 300, p. 112166, 2024.
+[24] X. Xia, H. Yin, J. Yu, Q. Wang, L. Cui, and X. Zhang, “Self-supervised
+hypergraph convolutional networks for session-based recommendation,”
+inProceedings of the AAAI Conference on Artificial Intelligence, vol. 35,
+no. 5, 2021, pp. 4503–4511.
+[25] V . D. Blondel, J.-L. Guillaume, R. Lambiotte, and E. Lefebvre, “Fast
+unfolding of communities in large networks,”Journal of Statistical
+Mechanics: Theory and Experiment, vol. 2008, no. 10, p. P10008, 2008.
+[26] A. K. Menon, S. Jayasumana, A. S. Rawat, H. Jain, A. Veit, and
+S. Kumar, “Long-tail learning via logit adjustment,” inInternational
+Conference on Learning Representations, 2021.
+[27] P. Yi and A. Zubiaga, “Learning like human annotators: Cyberbullying
+detection in lengthy social media sessions,” inProceedings of the ACM
+Web Conference 2023, 2023, pp. 4095–4103.

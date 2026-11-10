@@ -1,0 +1,54 @@
+{
+  "all_776_oof_predictions_replayed": true,
+  "trained_feedback_gradient_verified": true,
+  "source_hashes_unchanged": true,
+  "details": [
+    {
+      "fold": 1,
+      "replayed_validation_sessions": 156,
+      "replay_probability_max_difference": 1.1920928955078125e-07,
+      "trained_context_gradient_l1": 0.031746119260787964,
+      "support_and_non_stc_unchanged": true,
+      "row_mass_max_error": 1.9073486328125e-06,
+      "replay_positive_f1": 0.7027027027027027
+    },
+    {
+      "fold": 2,
+      "replayed_validation_sessions": 155,
+      "replay_probability_max_difference": 1.7881393432617188e-07,
+      "trained_context_gradient_l1": 0.0428384467959404,
+      "support_and_non_stc_unchanged": true,
+      "row_mass_max_error": 0.00018310546875,
+      "replay_positive_f1": 0.7079646017699115
+    },
+    {
+      "fold": 3,
+      "replayed_validation_sessions": 155,
+      "replay_probability_max_difference": 1.9371509552001953e-07,
+      "trained_context_gradient_l1": 0.04066590219736099,
+      "support_and_non_stc_unchanged": true,
+      "row_mass_max_error": 5.7220458984375e-06,
+      "replay_positive_f1": 0.6222222222222222
+    },
+    {
+      "fold": 4,
+      "replayed_validation_sessions": 155,
+      "replay_probability_max_difference": 1.4901161193847656e-07,
+      "trained_context_gradient_l1": 0.04192964732646942,
+      "support_and_non_stc_unchanged": true,
+      "row_mass_max_error": 3.0517578125e-05,
+      "replay_positive_f1": 0.6595744680851063
+    },
+    {
+      "fold": 5,
+      "replayed_validation_sessions": 155,
+      "replay_probability_max_difference": 1.7881393432617188e-07,
+      "trained_context_gradient_l1": 0.008571261540055275,
+      "support_and_non_stc_unchanged": true,
+      "row_mass_max_error": 6.103515625e-05,
+      "replay_positive_f1": 0.6534653465346535
+    }
+  ],
+  "final_test_evaluated": false,
+  "audit_source_sha256": "ee5dbf073750ef526be274a7744c75fe0d5b17d4b2c8ceb1c4c8f186f80de06f"
+}

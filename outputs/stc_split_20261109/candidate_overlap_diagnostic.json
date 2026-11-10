@@ -1,0 +1,15 @@
+{
+  "purpose": "Training-only overlap with other original STC candidates; own parent excluded; does not imply other parent will be selected",
+  "summary": {
+    "random": {
+      "children": 6272,
+      "mean_max_jaccard_to_other_original_stc": 0.45086549812386156,
+      "fraction_contained_in_other_original_stc": 0.11910076530612244
+    },
+    "semantic": {
+      "children": 6272,
+      "mean_max_jaccard_to_other_original_stc": 0.5382757494725021,
+      "fraction_contained_in_other_original_stc": 0.39174107142857145
+    }
+  }
+}

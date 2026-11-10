@@ -7,6 +7,7 @@ import configparser
 import json
 import logging
 import statistics
+import shutil
 import time
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
@@ -21,6 +22,8 @@ from bbp_behm.config import load_experiment_config
 from bbp_behm.data import PreprocessedSessionDataset
 from bbp_behm.hypergraph import HyperedgeBuilder
 from bbp_behm.model import BBPBeHM
+from bbp_behm.hsl_association import AssociationBBPBeHM
+from bbp_behm.cached_hypergraph import CachedHyperedgeBuilder
 from bbp_behm.training import (
     class_priors,
     confidence_statistics,
@@ -51,6 +54,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--mode", choices=("baseline", "bbp"), default="bbp")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--architecture",choices=("original","association"),default="original")
+    parser.add_argument("--association-mode",choices=("none","raw","context"),default="context")
+    parser.add_argument("--association-alpha",type=float,default=0.2)
+    parser.add_argument("--cache-graphs",action="store_true")
+    parser.add_argument("--torch-threads",type=int)
+    workers = parser.add_mutually_exclusive_group()
+    workers.add_argument("--worker-fold",type=int,choices=range(1,6))
+    workers.add_argument("--aggregate-workers",action="store_true")
+    parser.add_argument("--prepared-cache",type=Path)
+    parser.add_argument("--total-started-at",type=float)
+
+
     parser.add_argument("--epochs", type=int)
     parser.add_argument(
         "--selection-metric",
@@ -115,18 +130,21 @@ def json_ready(value: Any) -> Any:
     return value
 
 
-def build_fold_model(config, dataset, train_indices: tuple[int, ...], device: torch.device) -> BBPBeHM:
+def build_fold_model(config, dataset, train_indices: tuple[int, ...], device: torch.device, *, architecture="original", association_mode="context", association_alpha=0.2) -> BBPBeHM:
     """只利用当前折训练会话构建类别先验和置信度统计，避免验证或测试泄漏。"""
 
     priors = class_priors(dataset, train_indices, config.model.num_classes)
     confidence_class_means, confidence_global_mean = confidence_statistics(
         dataset, train_indices, config.model.num_classes
     )
-    return BBPBeHM(
+    model_class = AssociationBBPBeHM if architecture == "association" else BBPBeHM
+    options = dict(association_mode=association_mode,association_alpha=association_alpha) if architecture == "association" else {}
+    return model_class(
         config,
         priors,
         confidence_class_means=confidence_class_means,
         confidence_global_mean=confidence_global_mean,
+        **options,
     ).to(device)
 
 
@@ -223,6 +241,10 @@ def select_global_epoch(aggregate: list[dict[str, Any]]) -> dict[str, Any]:
 
 def main() -> None:
     args = parse_args()
+    if args.torch_threads is not None:
+        torch.set_num_threads(args.torch_threads)
+    model_options = dict(architecture=args.architecture,association_mode=args.association_mode,
+                         association_alpha=args.association_alpha)
     config = load_experiment_config(args.config)
     config.validate()
     settings = load_cv_settings(args.config)
@@ -241,6 +263,8 @@ def main() -> None:
     device = resolve_device(config.training.device)
     pruning_enabled = args.mode == "bbp"
     run_dir = args.output_dir / args.run_name
+    if (run_dir / "result.json").exists() or (run_dir / "cv_progress.json").exists():
+        raise FileExistsError("Refusing to overwrite an existing CV run")
     run_dir.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
         level=logging.INFO,
@@ -323,7 +347,26 @@ def main() -> None:
     fold_states: list[dict[int, dict[str, torch.Tensor]]] = []
     started = time.perf_counter()
 
-    for fold_id, train_indices, validation_indices in fold_indices:
+    # 仅缓存原始无标签确定性候选图；所有折训练统计仍独立计算。
+    cached_builder = None
+    if args.cache_graphs and not args.aggregate_workers:
+        if args.prepared_cache is not None:
+            saved = torch.load(args.prepared_cache,map_location="cpu",weights_only=False)
+            if (saved["indices"] != list(development_indices) or
+                saved["processed_sha256"] != config.data.processed_sha256 or
+                saved["hypergraph_config"] != asdict(config.hypergraph)):
+                raise ValueError("Prepared graph cache metadata mismatch")
+            cached_builder = CachedHyperedgeBuilder(saved["cache"])
+        else:
+            cached_builder = CachedHyperedgeBuilder.prepare(dataset,development_indices,config.hypergraph,device)
+
+    prediction_dir = run_dir / "validation_predictions"
+    prediction_dir.mkdir(exist_ok=True)
+    epoch_checkpoint_dir = run_dir / "epoch_checkpoints"
+    epoch_checkpoint_dir.mkdir(exist_ok=True)
+    training_folds = [] if args.aggregate_workers else [
+        fold for fold in fold_indices if args.worker_fold is None or fold[0] == args.worker_fold]
+    for fold_id, train_indices, validation_indices in training_folds:
         # 五折仅轮换开发集的训练/验证会话，所有折保持同一训练随机种子。
         fold_seed = args.seed
         fold_config = replace(config, model=replace(config.model, louvain_seed=fold_seed))
@@ -334,8 +377,8 @@ def main() -> None:
         validation_loader = make_loader(
             dataset, validation_indices, fold_config.training.batch_size, False, fold_seed
         )
-        model = build_fold_model(fold_config, dataset, train_indices, device)
-        builder = HyperedgeBuilder(fold_config.hypergraph)
+        model = build_fold_model(fold_config, dataset, train_indices, device, **model_options)
+        builder = cached_builder or HyperedgeBuilder(fold_config.hypergraph)
         optimizer = torch.optim.Adam(
             model.parameters(),
             lr=fold_config.training.learning_rate,
@@ -354,6 +397,8 @@ def main() -> None:
             label_counts(dataset, validation_indices),
         )
         for epoch in range(1, epochs + 1):
+            epoch_started = time.perf_counter()
+            torch.cuda.reset_peak_memory_stats(device) if device.type == 'cuda' else None
             summary = train_epoch(
                 model,
                 train_loader,
@@ -371,6 +416,7 @@ def main() -> None:
                 coverage_eta=coverage_eta,
                 feature_noise_std=feature_noise_std,
             )
+            predictions = []
             validation_metrics = evaluate(
                 model,
                 validation_loader,
@@ -385,9 +431,23 @@ def main() -> None:
                 coverage_q=coverage_q,
                 coverage_tail_gamma=coverage_tail_gamma,
                 coverage_eta=coverage_eta,
+                predictions_out=predictions,
             )
+            (prediction_dir / f"fold_{fold_id:02d}_epoch_{epoch:03d}.json").write_text(
+                json.dumps(predictions),encoding="utf-8")
             states[epoch] = clone_state_dict_to_cpu(model)
-            history.append({"epoch": epoch, "train": asdict(summary), "validation": validation_metrics})
+            history.append({"epoch":epoch,"train":asdict(summary),"validation":validation_metrics,
+                            "epoch_seconds":time.perf_counter()-epoch_started,
+                            "peak_memory_mb":torch.cuda.max_memory_allocated(device)/1024**2 if device.type=="cuda" else None})
+            torch.save({"model":states[epoch],"fold":fold_id,"epoch":epoch,"model_options":model_options},
+                       epoch_checkpoint_dir/f"fold_{fold_id:02d}_epoch_{epoch:03d}.pt")
+            (run_dir/"cv_progress.json").write_text(json.dumps({"phase":"training","fold":fold_id,
+                "epoch":epoch,"folds":settings.folds,"epochs":epochs,"last_validation":validation_metrics}),encoding="utf-8")
+            (run_dir/f"fold_{fold_id:02d}_history.json").write_text(json.dumps(history,indent=2),encoding="utf-8")
+            logging.info("ASSOCIATION fold=%d epoch=%d mean_abs_delta=%.8f row_mass_error=%.8g epoch_seconds=%.2f peak_memory_mb=%.1f",
+                fold_id,epoch,validation_metrics.get("association_mean_abs_weight_delta",0),
+                validation_metrics.get("association_row_mass_max_error",0),history[-1]["epoch_seconds"],history[-1]["peak_memory_mb"] or 0)
+
             logging.info(
                 "Fold %d epoch %03d train_loss=%.6f val_%s=%.6f val_auroc=%.6f",
                 fold_id,
@@ -399,6 +459,38 @@ def main() -> None:
             )
         all_fold_histories.append(history)
         fold_states.append(states)
+
+    if args.worker_fold is not None:
+        if args.evaluate_final_test:
+            raise ValueError("Individual workers must not evaluate the final holdout")
+        (run_dir/"worker_complete.json").write_text(json.dumps({"fold":args.worker_fold,"epochs":epochs,
+            "model_options":model_options,"final_test_evaluated":False}),encoding="utf-8")
+        logging.info("CV_FOLD_WORKER_COMPLETE fold=%d epochs=%d",args.worker_fold,epochs)
+        return
+
+    if args.aggregate_workers:
+        # 五折独立训练完毕后才聚合；所有checkpoint仍以共同epoch统一选择。
+        for fold_id,_,_ in fold_indices:
+            worker = run_dir/"workers"/f"fold_{fold_id:02d}"
+            completed = json.loads((worker/"worker_complete.json").read_text())
+            if completed["epochs"] != epochs or completed["model_options"] != model_options:
+                raise ValueError("Worker protocol mismatch")
+            worker_split = json.loads((worker/"split.json").read_text())
+            if worker_split != split_manifest:
+                raise ValueError("Worker split manifest mismatch")
+            history = json.loads((worker/f"fold_{fold_id:02d}_history.json").read_text())
+            if len(history) != epochs:
+                raise ValueError("Incomplete worker history")
+            all_fold_histories.append(history)
+            states = {}
+            for epoch in range(1,epochs+1):
+                name = f"fold_{fold_id:02d}_epoch_{epoch:03d}"
+                checkpoint = torch.load(worker/"epoch_checkpoints"/(name+".pt"),map_location="cpu",weights_only=False)
+                states[epoch] = checkpoint["model"]
+                shutil.copyfile(worker/"epoch_checkpoints"/(name+".pt"),epoch_checkpoint_dir/(name+".pt"))
+                shutil.copyfile(worker/"validation_predictions"/(name+".json"),prediction_dir/(name+".json"))
+            shutil.copyfile(worker/f"fold_{fold_id:02d}_history.json",run_dir/f"fold_{fold_id:02d}_history.json")
+            fold_states.append(states)
 
     aggregate_history = aggregate_epoch_metrics(all_fold_histories, args.selection_metric)
     selected_epoch = select_global_epoch(aggregate_history)
@@ -422,6 +514,7 @@ def main() -> None:
                 "fold": fold_id,
                 "fold_seed": fold_seed,
                 "global_epoch": selected_epoch_number,
+                "model_options": model_options,
                 "model": states[selected_epoch_number],
                 "config": json_ready(asdict(fold_config)),
             },
@@ -438,7 +531,7 @@ def main() -> None:
             # 最终集成重建时保持与对应折训练阶段完全相同的随机种子。
             fold_seed = args.seed
             fold_config = replace(config, model=replace(config.model, louvain_seed=fold_seed))
-            model = build_fold_model(fold_config, dataset, train_indices, device)
+            model = build_fold_model(fold_config, dataset, train_indices, device, **model_options)
             model.load_state_dict(states[selected_epoch_number])
             builder = HyperedgeBuilder(fold_config.hypergraph)
             labels, probabilities = collect_positive_probabilities(
@@ -472,12 +565,25 @@ def main() -> None:
             "message": "Final test was intentionally skipped. Use --evaluate-final-test only after locking the configuration.",
         }
     elapsed_seconds = time.perf_counter() - started
+    if args.aggregate_workers and args.total_started_at is not None:
+        elapsed_seconds = time.time() - args.total_started_at
     fold_selected_metrics = [
         history[selected_epoch_number - 1]["validation"] for history in all_fold_histories
     ]
+    oof = []
+    for fold_id, _, _ in fold_indices:
+        oof.extend(json.loads((prediction_dir/f"fold_{fold_id:02d}_epoch_{selected_epoch_number:03d}.json").read_text()))
+    assert len(oof)==len(development_indices) and {p["index"] for p in oof}==set(development_indices)
+    assert len({p["index"] for p in oof})==len(oof) and not {p["index"] for p in oof}.intersection(final_test_indices)
+    oof.sort(key=lambda p:p["index"])
+    (run_dir/"oof_predictions.json").write_text(json.dumps(oof,indent=2),encoding="utf-8")
+    oof_metrics = classification_metrics([p["label"] for p in oof],[p["positive_probability"] for p in oof])
     result = {
         "_purpose": "VINE fixed final holdout plus stratified five-fold development-set cross-validation",
         "mode": args.mode,
+        "model_options": model_options,
+        "graph_cache_enabled": args.cache_graphs,
+        "oof_metrics_at_global_epoch": oof_metrics,
         "seed": args.seed,
         "selection_metric": args.selection_metric,
         "epochs": epochs,
@@ -514,6 +620,7 @@ def main() -> None:
     torch.save(
         {
             "global_epoch": selected_epoch_number,
+            "model_options": model_options,
             "fold_checkpoints": [states[selected_epoch_number] for states in fold_states],
             "config": json_ready(asdict(config)),
             "result": result,
@@ -527,6 +634,8 @@ def main() -> None:
         )
     else:
         logging.info("Final test was intentionally skipped to preserve the fixed holdout.")
+    (run_dir/"cv_progress.json").write_text(json.dumps({"phase":"complete","folds":settings.folds,
+        "epochs":epochs,"global_epoch":selected_epoch_number,"final_test_evaluated":args.evaluate_final_test}),encoding="utf-8")
     logging.info("CV run completed in %.2f seconds: %s", elapsed_seconds, run_dir)
 
 

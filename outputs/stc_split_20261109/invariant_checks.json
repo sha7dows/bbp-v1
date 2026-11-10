@@ -1,0 +1,30 @@
+{
+  "synthetic_checks": true,
+  "homogeneous_not_split": true,
+  "empty_graph": true,
+  "exact_common_parent_budget": true,
+  "per_child_size_match": true,
+  "details": {
+    "none": {
+      "selector_gradient_l1": 1.2561975099961273,
+      "parents": 216,
+      "propagation_edges": 216,
+      "incidence": 20647.0,
+      "logit_max_difference": 1.7881393432617188e-07
+    },
+    "random": {
+      "selector_gradient_l1": 1.2561991321563255,
+      "parents": 216,
+      "propagation_edges": 226,
+      "incidence": 20687.0,
+      "logit_max_difference": 0.0015938282012939453
+    },
+    "semantic": {
+      "selector_gradient_l1": 1.2514286063378677,
+      "parents": 216,
+      "propagation_edges": 226,
+      "incidence": 20687.0,
+      "logit_max_difference": 0.00420534610748291
+    }
+  }
+}

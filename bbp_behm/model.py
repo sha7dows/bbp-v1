@@ -129,7 +129,7 @@ class BBPBeHM(nn.Module):
             straight_through_mask = hard_mask
             selection = None
         else:
-            selection = self.selector(
+            selection = self.select_hyperedges(
                 projected_nodes=projected_nodes,
                 batch_x=batch.x,
                 graph_ids=batch.graph_ids,
@@ -150,15 +150,25 @@ class BBPBeHM(nn.Module):
             straight_through_mask = selection.straight_through_mask
 
         masked_incidence = hypergraph.incidence * straight_through_mask[:, None]
+        # 默认实现保持原结构；实验子类可在整边选择后受约束地精简传播关联。
+        if selection is not None:
+            masked_incidence = self.refine_incidence(projected_nodes, hypergraph, masked_incidence, hard_mask)
+        # 关联权重扩展点默认恒等；独立于已有成员编辑和规模分解实验。
+        masked_incidence = self.prepare_associations(projected_nodes, hypergraph, masked_incidence, hard_mask)
+        # 整边选择后可受约束分解传播边；默认路径保持父边及原输出不变。
+        propagation_graph, masked_incidence, propagation_mask = self.prepare_propagation(
+            hypergraph, masked_incidence, hard_mask
+        )
         backbone_output = self.backbone.forward_projected(
             projected_nodes=projected_nodes,
             incidence=masked_incidence,
             graph_ids=batch.graph_ids,
-            edge_to_session=hypergraph.edge_to_session,
-            hard_edge_mask=hard_mask,
+            edge_to_session=propagation_graph.edge_to_session,
+            hard_edge_mask=propagation_mask,
             num_sessions=batch.num_graphs,
             labels=batch.labels,
             confidences=batch.confidences,
+            topology_incidence=self.ibg_incidence(propagation_graph, masked_incidence),
         )
         # 预算由稳定覆盖约束决定，评分器仅通过直通掩码接收分类任务梯度。
         total_loss = backbone_output.classification_loss
@@ -199,6 +209,26 @@ class BBPBeHM(nn.Module):
             masked_incidence=masked_incidence,
             redundancy_loss=redundancy_loss,
         )
+
+    def prepare_associations(self, projected_nodes, hypergraph, incidence, hard_mask):
+        """默认不改变关联权重，保持旧模型和检查点行为。"""
+        return incidence
+
+    def ibg_incidence(self, hypergraph, propagation_incidence):
+        """旧分支沿用自己的传播关联；加权实验显式覆盖二值拓扑来源。"""
+        return propagation_incidence
+
+    def prepare_propagation(self, hypergraph, incidence, hard_mask):
+        """默认直接传播父边；分解实验在子类显式启用。"""
+        return hypergraph, incidence, hard_mask
+
+    def select_hyperedges(self, **kwargs) -> SelectionOutput:
+        """默认直接使用原选择器，保留历史模型的前向与检查点行为。"""
+        return self.selector(**kwargs)
+
+    def refine_incidence(self, projected_nodes, hypergraph, incidence, hard_mask) -> Tensor:
+        """默认不编辑关联；结构修复仅由显式启用的实验子类实现。"""
+        return incidence
 
     def _kept_set_redundancy(
         self, hypergraph: HyperedgeBatch, soft_mask: Tensor, num_sessions: int
